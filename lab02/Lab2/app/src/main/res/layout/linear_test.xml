@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:background="#CF64FF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="#AE32FF"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:background="#e783c0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="#FF32AE"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:background="#75c18e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="#11AC44"
+        android:layout_weight="1" />
+</LinearLayout>
