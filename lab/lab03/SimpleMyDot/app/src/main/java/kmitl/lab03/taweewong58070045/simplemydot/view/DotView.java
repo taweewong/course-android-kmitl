@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import java.util.ArrayList;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
@@ -14,6 +15,7 @@ public class DotView extends View {
     private Paint paint;
     private Dot dot;
     private ArrayList<Dot> dots;
+    private OnTouchListener listener;
 
     public DotView(Context context) {
         super(context);
@@ -44,6 +46,13 @@ public class DotView extends View {
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        listener.onTouch(this, event);
+
+        return super.onTouchEvent(event);
+    }
+
     public void setDot(Dot dot) {
         this.dot = dot;
     }
@@ -54,5 +63,9 @@ public class DotView extends View {
 
     public void clear() {
         dots.clear();
+    }
+
+    public void setListener(OnTouchListener listener) {
+        this.listener = listener;
     }
 }
