@@ -28,13 +28,12 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         Random random = new Random();
         int centerX = random.nextInt(dotView.getWidth());
         int centerY = random.nextInt(dotView.getHeight());
-        this.dot.setCenterX(centerX);
-        this.dot.setCenterY(centerY);
+        new Dot(centerX, centerY, 30, this);
     }
 
     @Override
     public void onDotChanged(Dot dot) {
-        dotView.setDot(dot);
+        dotView.addDot(dot);
         dotView.invalidate();
     }
 }
