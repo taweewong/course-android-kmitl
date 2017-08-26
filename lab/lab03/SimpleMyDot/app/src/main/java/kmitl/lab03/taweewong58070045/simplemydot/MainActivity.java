@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        dotView.addDot(new Dot((int) event.getX(), (int) event.getY(), 50, Color.BLUE, this));
-        dotView.invalidate();
+        new Dot((int) event.getX(), (int) event.getY(), 50, Color.BLUE, this);
         return false;
     }
 }
