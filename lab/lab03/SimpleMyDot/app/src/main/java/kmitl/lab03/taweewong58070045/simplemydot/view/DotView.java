@@ -13,7 +13,6 @@ import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 public class DotView extends View {
 
     private Paint paint;
-    private Dot dot;
     private ArrayList<Dot> dots;
     private OnTouchListener listener;
 
@@ -51,10 +50,6 @@ public class DotView extends View {
         listener.onTouch(this, event);
 
         return super.onTouchEvent(event);
-    }
-
-    public void setDot(Dot dot) {
-        this.dot = dot;
     }
 
     public void addDot(Dot dot) {
