@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         new Dot(centerX, centerY, 30, randomColor(), this);
     }
 
+    public void clearDots(View view) {
+        dotView.clear();
+        dotView.invalidate();
+    }
+
     @Override
     public void onDotChanged(Dot dot) {
         dotView.addDot(dot);
