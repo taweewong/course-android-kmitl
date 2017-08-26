@@ -3,6 +3,7 @@ package kmitl.lab03.taweewong58070045.simplemydot;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
-public class MainActivity extends AppCompatActivity implements Dot.DotChangedListener{
+public class MainActivity extends AppCompatActivity implements Dot.DotChangedListener, DotView.OnTouchListener{
 
     private Dot dot;
     private DotView dotView;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         setContentView(R.layout.activity_main);
 
         dotView = (DotView) findViewById(R.id.dotView);
+        dotView.setListener(this);
     }
 
     public void onRandomDot(View view) {
@@ -48,5 +50,12 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         int b = random.nextInt(256);
 
         return Color.rgb(r, g, b);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        dotView.addDot(new Dot((int) event.getX(), (int) event.getY(), 50, Color.BLUE, this));
+        dotView.invalidate();
+        return false;
     }
 }
