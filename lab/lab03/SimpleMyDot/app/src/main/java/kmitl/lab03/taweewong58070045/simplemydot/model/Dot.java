@@ -7,11 +7,6 @@ public class Dot {
     }
 
     private DotChangedListener listener;
-
-    public void setListener(DotChangedListener listener) {
-        this.listener = listener;
-    }
-
     private int centerX;
     private int centerY;
     private int radius;
@@ -31,6 +26,10 @@ public class Dot {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
+    }
+
+    public void setListener(DotChangedListener listener) {
+        this.listener = listener;
     }
 
     public int getCenterX() {
