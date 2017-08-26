@@ -39,7 +39,9 @@ public class DotView extends View {
         super.onDraw(canvas);
         paint.setColor(Color.RED);
         if (!dots.isEmpty()) {
-            canvas.drawCircle(dot.getCenterX(), dot.getCenterY(), 30, paint);
+            for (Dot dot : dots) {
+                canvas.drawCircle(dot.getCenterX(), dot.getCenterY(), 30, paint);
+            }
         }
     }
 
