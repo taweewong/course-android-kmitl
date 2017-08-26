@@ -13,7 +13,6 @@ import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
 public class MainActivity extends AppCompatActivity implements Dot.DotChangedListener, DotView.OnTouchListener{
 
-    private Dot dot;
     private DotView dotView;
 
     @Override
