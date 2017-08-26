@@ -51,4 +51,8 @@ public class DotView extends View {
     public void addDot(Dot dot) {
         dots.add(dot);
     }
+
+    public void clear() {
+        dots.clear();
+    }
 }
