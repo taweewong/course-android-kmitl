@@ -2,7 +2,6 @@ package kmitl.lab03.taweewong58070045.simplemydot.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -37,9 +36,9 @@ public class DotView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paint.setColor(Color.RED);
         if (!dots.isEmpty()) {
             for (Dot dot : dots) {
+                paint.setColor(dot.getColor());
                 canvas.drawCircle(dot.getCenterX(), dot.getCenterY(), 30, paint);
             }
         }
