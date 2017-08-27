@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Dot.OnDotChangedL
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        new Dot((int) event.getX(), (int) event.getY(), 50, Color.BLUE, this);
+        new Dot((int) event.getX(), (int) event.getY(), 150, Color.BLUE, this);
 
         return false;
     }
