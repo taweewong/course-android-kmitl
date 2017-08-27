@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Dot.OnDotChangedL
         new Dot(centerX, centerY, 30, randomColor(), this);
     }
 
-    public void clearDots(View view) {
+    public void onClearDots(View view) {
         dotView.clear();
         dotView.invalidate();
     }
