@@ -11,7 +11,7 @@ import java.util.Random;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
-public class MainActivity extends AppCompatActivity implements Dot.DotChangedListener, DotView.OnTouchListener{
+public class MainActivity extends AppCompatActivity implements Dot.OnDotChangedListener, DotView.OnTouchListener{
 
     private DotView dotView;
 

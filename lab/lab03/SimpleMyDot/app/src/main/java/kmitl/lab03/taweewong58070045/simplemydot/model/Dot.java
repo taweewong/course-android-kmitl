@@ -2,17 +2,17 @@ package kmitl.lab03.taweewong58070045.simplemydot.model;
 
 public class Dot {
 
-    public interface DotChangedListener {
+    public interface OnDotChangedListener {
         void onDotChanged(Dot dot);
     }
 
-    private DotChangedListener listener;
+    private OnDotChangedListener listener;
     private int centerX;
     private int centerY;
     private int radius;
     private int color;
 
-    public Dot(int centerX, int centerY, int radius, int color, DotChangedListener listener) {
+    public Dot(int centerX, int centerY, int radius, int color, OnDotChangedListener listener) {
         this.listener = listener;
         this.centerX = centerX;
         this.centerY = centerY;
@@ -28,7 +28,7 @@ public class Dot {
         this.radius = radius;
     }
 
-    public void setListener(DotChangedListener listener) {
+    public void setListener(OnDotChangedListener listener) {
         this.listener = listener;
     }
 
