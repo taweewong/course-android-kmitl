@@ -40,7 +40,7 @@ public class DotView extends View {
         if (!dots.isEmpty()) {
             for (Dot dot : dots) {
                 paint.setColor(dot.getColor());
-                canvas.drawCircle(dot.getCenterX(), dot.getCenterY(), 30, paint);
+                canvas.drawCircle(dot.getCenterX(), dot.getCenterY(), dot.getRadius(), paint);
             }
         }
     }
