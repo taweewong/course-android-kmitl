@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
         setContentView(R.layout.activity_main);
 
         dotView = (DotView) findViewById(R.id.dotView);
-        dotView.setListener(this);
+        dotView.setOnTouchListener(this);
     }
 
     public void onRandomDot(View view) {
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements Dot.DotChangedLis
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         new Dot((int) event.getX(), (int) event.getY(), 50, Color.BLUE, this);
+
         return false;
     }
 }

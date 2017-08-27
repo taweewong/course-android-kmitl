@@ -60,7 +60,7 @@ public class DotView extends View {
         dots.clear();
     }
 
-    public void setListener(OnTouchListener listener) {
+    public void setOnTouchListener(OnTouchListener listener) {
         this.listener = listener;
     }
 }
