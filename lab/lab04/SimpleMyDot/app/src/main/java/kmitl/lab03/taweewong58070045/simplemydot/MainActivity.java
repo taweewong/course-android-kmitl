@@ -4,32 +4,29 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.Random;
 
+import kmitl.lab03.taweewong58070045.simplemydot.model.Colors;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotParcelable;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotSerializable;
+import kmitl.lab03.taweewong58070045.simplemydot.model.Dots;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
-public class MainActivity extends AppCompatActivity implements Dot.OnDotChangedListener, DotView.OnTouchListener{
+public class MainActivity extends AppCompatActivity implements Dots.OnDotsChangedListener, DotView.OnDotViewPressListener{
 
     private DotView dotView;
+    private Dots dots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final DotSerializable dotSerializable = new DotSerializable();
-        dotSerializable.setCenterX(150);
-        dotSerializable.setCenterY(150);
-        dotSerializable.setColor(Color.RED);
-        dotSerializable.setRadius(30);
-
+        final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
         final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
 
         Button openActivity = (Button) findViewById(R.id.openActivity);
@@ -45,42 +42,39 @@ public class MainActivity extends AppCompatActivity implements Dot.OnDotChangedL
         });
 
         dotView = (DotView) findViewById(R.id.dotView);
-        dotView.setOnTouchListener(this);
+        dotView.setListener(this);
+        dots = new Dots();
+        dots.setListener(this);
     }
-
-
 
     public void onRandomDot(View view) {
         Random random = new Random();
         int centerX = random.nextInt(dotView.getWidth());
         int centerY = random.nextInt(dotView.getHeight());
-        new Dot(centerX, centerY, 30, randomColor(), this);
+        Dot newDot = new Dot(centerX, centerY, 30, new Colors().randomColor());
+        dots.addDot(newDot);
     }
 
     public void onClearDots(View view) {
-        dotView.clear();
+        dots.clearAll();
+    }
+
+    @Override
+    public void onDotsChanged(Dots dots) {
+        dotView.setDots(dots);
         dotView.invalidate();
     }
 
     @Override
-    public void onDotChanged(Dot dot) {
-        dotView.addDot(dot);
-        dotView.invalidate();
-    }
+    public void onDotViewPressed(int x, int y) {
+        int dotPosition = dots.findDot(x, y);
 
-    private int randomColor() {
-        Random random = new Random();
-        int r = random.nextInt(256);
-        int g = random.nextInt(256);
-        int b = random.nextInt(256);
+        if (dotPosition == -1) {
+            Dot newDot = new Dot(x, y, 50, new Colors().randomColor());
+            dots.addDot(newDot);
+        } else {
+            dots.removeBy(dotPosition);
+        }
 
-        return Color.rgb(r, g, b);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        new Dot((int) event.getX(), (int) event.getY(), 150, Color.BLUE, this);
-
-        return false;
     }
 }

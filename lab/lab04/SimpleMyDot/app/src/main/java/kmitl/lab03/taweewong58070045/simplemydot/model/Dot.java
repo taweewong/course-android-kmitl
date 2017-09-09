@@ -1,25 +1,16 @@
 package kmitl.lab03.taweewong58070045.simplemydot.model;
 
 public class Dot {
-
-    public interface OnDotChangedListener {
-        void onDotChanged(Dot dot);
-    }
-
-    private OnDotChangedListener listener;
     private int centerX;
     private int centerY;
     private int radius;
     private int color;
 
-    public Dot(int centerX, int centerY, int radius, int color, OnDotChangedListener listener) {
-        this.listener = listener;
+    public Dot(int centerX, int centerY, int radius, int color) {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
         this.color = color;
-
-        this.listener.onDotChanged(this);
     }
 
     public Dot(int centerX, int centerY, int radius) {
@@ -28,17 +19,12 @@ public class Dot {
         this.radius = radius;
     }
 
-    public void setListener(OnDotChangedListener listener) {
-        this.listener = listener;
-    }
-
     public int getCenterX() {
         return centerX;
     }
 
     public void setCenterX(int centerX) {
         this.centerX = centerX;
-        this.listener.onDotChanged(this);
     }
 
     public int getCenterY() {
@@ -47,7 +33,6 @@ public class Dot {
 
     public void setCenterY(int centerY) {
         this.centerY = centerY;
-        this.listener.onDotChanged(this);
     }
 
     public int getRadius() {
