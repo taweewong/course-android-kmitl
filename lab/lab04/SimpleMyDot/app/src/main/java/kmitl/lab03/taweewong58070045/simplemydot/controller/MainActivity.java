@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
+                        startEditDotActivity(dots.getDot(dotPosition));
                         Toast.makeText(MainActivity.this, optionList.get(item), Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
@@ -115,5 +116,11 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
 
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void startEditDotActivity(Dot dot) {
+        Intent intent = new Intent(MainActivity.this, EditDotActivity.class);
+        intent.putExtra("dot", dot);
+        startActivity(intent);
     }
 }
