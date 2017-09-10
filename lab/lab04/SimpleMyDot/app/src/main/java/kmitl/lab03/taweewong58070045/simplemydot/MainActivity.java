@@ -1,12 +1,17 @@
 package kmitl.lab03.taweewong58070045.simplemydot;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import kmitl.lab03.taweewong58070045.simplemydot.model.Colors;
@@ -75,8 +80,27 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
             Dot newDot = new Dot(x, y, 50, new Colors().randomColor());
             dots.addDot(newDot);
         } else {
-            dots.removeBy(dotPosition);
+            showAlertDialog();
+            //dots.removeBy(dotPosition);
         }
+    }
 
+    private void showAlertDialog() {
+        final List<String> optionList = new ArrayList<>();
+        optionList.add("Edit");
+        optionList.add("delete");
+        CharSequence[] options = optionList.toArray(new String[optionList.size()]);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("What you want to do with your dot?");
+        dialogBuilder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, optionList.get(which), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
     }
 }
