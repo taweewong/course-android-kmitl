@@ -30,6 +30,10 @@ public class EditDotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_dot);
 
+        initialize();
+    }
+
+    private void initialize() {
         dot = getIntent().getParcelableExtra("dot");
         dotPosition = getIntent().getIntExtra("dotPosition", -1);
         dotView = (DotView) findViewById(R.id.editDotView);
