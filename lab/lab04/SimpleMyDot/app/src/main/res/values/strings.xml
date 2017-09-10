@@ -3,4 +3,10 @@
     <string name="random_dot">RANDOM DOT</string>
     <string name="clear">CLEAR</string>
     <string name="open_activity">open activity</string>
+    <string name="editDotPreview">Preview :</string>
+    <string name="editDotColor">Color :</string>
+    <string name="editDotRadius">Radius :</string>
+    <string name="applyButton">Apply</string>
+    <string name="confirmButton">Confirm</string>
+    <string name="cancelButton">Cancel</string>
 </resources>

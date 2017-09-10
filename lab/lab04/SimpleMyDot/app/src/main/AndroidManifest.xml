@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.SecondActivity"></activity>
+        <activity android:name=".controller.SecondActivity" />
+        <activity android:name=".controller.EditDotActivity"></activity>
     </application>
 
 </manifest>
