@@ -1,6 +1,7 @@
 package kmitl.lab03.taweewong58070045.simplemydot.controller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,13 +22,16 @@ public class EditDotActivity extends AppCompatActivity {
     Button colorPickerButton;
     EditText radiusEditText;
     DotView dotView;
+    Dot dot;
+    int dotPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_dot);
 
-        Dot dot = getIntent().getParcelableExtra("dot");
+        dot = getIntent().getParcelableExtra("dot");
+        dotPosition = getIntent().getIntExtra("dotPosition", -1);
         dotView = (DotView) findViewById(R.id.editDotView);
         colorPickerButton = (Button) findViewById(R.id.colorPickerButton);
         radiusEditText = (EditText) findViewById(R.id.radiusEditText);
@@ -38,6 +42,14 @@ public class EditDotActivity extends AppCompatActivity {
 
     public void onClickColorPicker(View view) {
         showColorPicker();
+    }
+
+    public void onClickConfirm(View view) {
+        returnDot();
+    }
+
+    public void onClickCancel(View view) {
+        finish();
     }
 
     private void showColorPicker() {
@@ -56,6 +68,7 @@ public class EditDotActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                         colorPickerButton.setBackgroundColor(selectedColor);
+                        dot.setColor(selectedColor);
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -65,5 +78,14 @@ public class EditDotActivity extends AppCompatActivity {
                 })
                 .build()
                 .show();
+    }
+
+    private void returnDot() {
+        dot.setRadius(Integer.parseInt(radiusEditText.getText().toString()));
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("dot", dot);
+        returnIntent.putExtra("dotPosition", dotPosition);
+        setResult(RESULT_OK, returnIntent);
+        finish();
     }
 }
