@@ -1,4 +1,4 @@
-package kmitl.lab03.taweewong58070045.simplemydot;
+package kmitl.lab03.taweewong58070045.simplemydot.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import kmitl.lab03.taweewong58070045.simplemydot.R;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Colors;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotParcelable;

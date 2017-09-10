@@ -1,4 +1,4 @@
-package kmitl.lab03.taweewong58070045.simplemydot;
+package kmitl.lab03.taweewong58070045.simplemydot.controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import kmitl.lab03.taweewong58070045.simplemydot.R;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotParcelable;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotSerializable;
 
