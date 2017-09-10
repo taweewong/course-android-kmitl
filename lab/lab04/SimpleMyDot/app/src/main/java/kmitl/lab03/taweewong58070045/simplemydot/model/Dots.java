@@ -38,12 +38,16 @@ public class Dots {
         for (int i = 0; i < allDot.size(); i++) {
             int centerX = allDot.get(i).getCenterX();
             int centerY = allDot.get(i).getCenterY();
-            double distance = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
+            double distance = getDistance(centerX, centerY, x ,y);
 
             if (distance <= allDot.get(i).getRadius()) {
                 return i;
             }
         }
         return -1;
+    }
+
+    private double getDistance(int x1, int y1, int x2, int y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 }
