@@ -80,23 +80,35 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
             Dot newDot = new Dot(x, y, 50, new Colors().randomColor());
             dots.addDot(newDot);
         } else {
-            showAlertDialog();
-            //dots.removeBy(dotPosition);
+            showAlertDialog(dotPosition);
         }
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(final int dotPosition) {
         final List<String> optionList = new ArrayList<>();
         optionList.add("Edit");
-        optionList.add("delete");
+        optionList.add("Delete");
         CharSequence[] options = optionList.toArray(new String[optionList.size()]);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("What you want to do with your dot?");
+        dialogBuilder.setTitle("Edit or Delete ?");
         dialogBuilder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0:
+                        Toast.makeText(MainActivity.this, optionList.get(item), Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        dots.removeBy(dotPosition);
+                        Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, optionList.get(which), Toast.LENGTH_SHORT).show();
+
             }
         });
 
