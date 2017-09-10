@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
     private DotView dotView;
     private Dots dots;
 
+    static final int EDIT_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +100,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        startEditDotActivity(dots.getDot(dotPosition));
-                        Toast.makeText(MainActivity.this, optionList.get(item), Toast.LENGTH_SHORT).show();
+                        startEditDotActivity(dots.getDot(dotPosition), dotPosition);
                         break;
                     case 1:
                         dots.removeBy(dotPosition);
@@ -118,9 +119,24 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         alertDialog.show();
     }
 
-    private void startEditDotActivity(Dot dot) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EDIT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Dot dot = data.getParcelableExtra("dot");
+                int dotPosition = data.getIntExtra("dotPosition", -1);
+
+                if (dotPosition != -1) {
+                    dots.setDot(dotPosition, dot);
+                }
+            }
+        }
+    }
+
+    private void startEditDotActivity(Dot dot, int dotPosition) {
         Intent intent = new Intent(MainActivity.this, EditDotActivity.class);
         intent.putExtra("dot", dot);
-        startActivity(intent);
+        intent.putExtra("dotPosition", dotPosition);
+        startActivityForResult(intent, EDIT_REQUEST);
     }
 }
