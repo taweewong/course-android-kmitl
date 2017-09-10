@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dotView = (DotView) findViewById(R.id.dotView);
+        dotView.setListener(this);
+        dots = new Dots();
+        dots.setListener(this);
+    }
+
+    public void onOpenActivity(View view) {
         final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
         final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
 
@@ -40,11 +47,6 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
                 startActivity(intent);
             }
         });
-
-        dotView = (DotView) findViewById(R.id.dotView);
-        dotView.setListener(this);
-        dots = new Dots();
-        dots.setListener(this);
     }
 
     public void onRandomDot(View view) {
