@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initialize();
+    }
+
+    private void initialize() {
         dotView = (DotView) findViewById(R.id.dotView);
         dotView.setListener(this);
         dots = new Dots();
