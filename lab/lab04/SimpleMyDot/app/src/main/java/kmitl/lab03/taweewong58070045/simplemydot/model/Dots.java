@@ -24,6 +24,15 @@ public class Dots {
         this.listener.onDotsChanged(this);
     }
 
+    public Dot getDot(int index) {
+        return allDot.get(index);
+    }
+
+    public void setDot(int index, Dot dot) {
+        allDot.set(index, dot);
+        listener.onDotsChanged(this);
+    }
+
     public void clearAll() {
         allDot.clear();
         this.listener.onDotsChanged(this);
