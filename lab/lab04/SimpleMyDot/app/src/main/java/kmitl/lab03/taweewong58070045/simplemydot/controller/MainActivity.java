@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
         final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
 
-        Button openActivity = (Button) findViewById(R.id.openActivity);
+        Button openActivity = (Button) findViewById(R.id.shareImage);
         openActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
