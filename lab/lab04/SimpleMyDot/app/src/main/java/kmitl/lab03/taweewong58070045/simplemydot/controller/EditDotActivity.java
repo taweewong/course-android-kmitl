@@ -60,7 +60,7 @@ public class EditDotActivity extends AppCompatActivity {
         ColorPickerDialogBuilder
                 .with(EditDotActivity.this)
                 .setTitle("Choose color")
-                .initialColor(Color.RED)
+                .initialColor(dot.getColor())
                 .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                 .density(12)
                 .setOnColorSelectedListener(new OnColorSelectedListener() {
