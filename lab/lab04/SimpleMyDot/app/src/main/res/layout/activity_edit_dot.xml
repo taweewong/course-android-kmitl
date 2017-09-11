@@ -20,7 +20,7 @@
 
     <kmitl.lab03.taweewong58070045.simplemydot.view.DotPreview
         android:id="@+id/editDotView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="203dp"
         android:background="#EEEEEE"
         android:layout_marginLeft="8dp"
@@ -48,8 +48,8 @@
     <Button
         android:id="@+id/colorPickerButton"
         android:background="@color/colorAccent"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
         android:onClick="onClickColorPicker"
         app:layout_constraintBottom_toBottomOf="@+id/editDotColor"
         app:layout_constraintLeft_toRightOf="@+id/editDotColor"
