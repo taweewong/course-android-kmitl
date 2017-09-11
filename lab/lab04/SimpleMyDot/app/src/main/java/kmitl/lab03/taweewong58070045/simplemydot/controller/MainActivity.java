@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
     }
 
     public void onOpenActivity(View view) {
+        //Code in Workshop Week04
         final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
         final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
 
