@@ -2,7 +2,9 @@ package kmitl.lab03.taweewong58070045.simplemydot.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +23,7 @@ import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotParcelable;
 import kmitl.lab03.taweewong58070045.simplemydot.model.DotSerializable;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dots;
+import kmitl.lab03.taweewong58070045.simplemydot.utility.ScreenshotUtils;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
 public class MainActivity extends AppCompatActivity implements Dots.OnDotsChangedListener, DotView.OnDotViewPressListener{
@@ -61,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         });
     }
 
+    public void onCaptureScreen(View view) {
+        Bitmap bitmap = ScreenshotUtils.getScreenshot(dotView);
+        File saveFilePath = ScreenshotUtils.getMainDirectoryName(this);
+        File file = ScreenshotUtils.store(bitmap, "screenshot.jpg", saveFilePath);
+        shareImageFile(file);
+    }
+
     public void onRandomDot(View view) {
         Random random = new Random();
         int centerX = random.nextInt(dotView.getWidth());
@@ -89,6 +100,14 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         } else {
             showAlertDialog(dotPosition);
         }
+    }
+
+    private void shareImageFile(File imageFile) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile));
+        intent.setType("image/jpg");
+        startActivity(Intent.createChooser(intent, "send image"));
     }
 
     private void showAlertDialog(final int dotPosition) {
