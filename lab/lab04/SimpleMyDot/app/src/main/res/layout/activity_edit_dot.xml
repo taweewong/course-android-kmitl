@@ -6,109 +6,155 @@
     android:layout_height="match_parent"
     tools:context="kmitl.lab03.taweewong58070045.simplemydot.controller.EditDotActivity">
 
-    <TextView
-        android:id="@+id/editDotPreview"
-        android:text="@string/edit_dot_preview"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <kmitl.lab03.taweewong58070045.simplemydot.view.DotPreview
-        android:id="@+id/editDotView"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="203dp"
-        android:background="#EEEEEE"
-        android:layout_marginLeft="8dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/editDotPreview"
-        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/editDotPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/edit_dot_preview"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <kmitl.lab03.taweewong58070045.simplemydot.view.DotPreview
+            android:id="@+id/editDotView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:background="#EEEEEE"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editDotPreview" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintHorizontal_bias="0.0" />
-
-    <TextView
-        android:id="@+id/editDotColor"
-        android:text="@string/edit_dot_color"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="18dp"
-        app:layout_constraintTop_toBottomOf="@+id/editDotView" />
-
-    <Button
-        android:id="@+id/colorPickerButton"
-        android:background="@color/colorAccent"
-        android:layout_width="88dp"
-        android:layout_height="48dp"
-        android:onClick="onClickColorPicker"
-        app:layout_constraintBottom_toBottomOf="@+id/editDotColor"
-        app:layout_constraintLeft_toRightOf="@+id/editDotColor"
-        android:layout_marginStart="8dp" />
-
-    <TextView
-        android:id="@+id/editDotRadius"
-        android:text="@string/edit_dot_radius"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/editDotColor" />
-
-    <EditText
-        android:id="@+id/radiusEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintLeft_toRightOf="@+id/editDotRadius"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editDotRadius" />
-
-    <Button
-        android:id="@+id/applyButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/apply_button"
-        android:onClick="onClickApply"
-        app:layout_constraintRight_toLeftOf="@+id/confirmButton"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
-
-    <Button
-        android:id="@+id/confirmButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/confirm_button"
-        android:onClick="onClickConfirm"
-        android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/cancel_button"
-        android:onClick="onClickCancel"
+        <TextView
+            android:id="@+id/editDotColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit_dot_color"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editDotView" />
+
+        <Button
+            android:id="@+id/colorPickerButton"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:onClick="onClickColorPicker"
+            app:layout_constraintBottom_toBottomOf="@+id/editDotColor"
+            app:layout_constraintLeft_toRightOf="@+id/editDotColor" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/editDotRadius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit_dot_radius"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editDotColor" />
+
+        <EditText
+            android:id="@+id/radiusEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/editDotRadius"
+            app:layout_constraintLeft_toRightOf="@+id/editDotRadius" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:onClick="onClickCancel"
+            android:text="@string/cancel_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Button
+            android:id="@+id/applyButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/orange"
+            android:onClick="onClickApply"
+            android:text="@string/apply_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/confirmButton" />
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/green"
+            android:onClick="onClickConfirm"
+            android:text="@string/confirm_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
