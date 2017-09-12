@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Colors {
 
-    public int randomColor() {
+    public static int randomColor() {
         Random random = new Random();
         int r = random.nextInt(255);
         int g = random.nextInt(255);

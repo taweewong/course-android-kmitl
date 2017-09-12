@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         Random random = new Random();
         int centerX = random.nextInt(dotView.getWidth());
         int centerY = random.nextInt(dotView.getHeight());
-        Dot newDot = new Dot(centerX, centerY, 30, new Colors().randomColor());
+        Dot newDot = new Dot(centerX, centerY, 30, Colors.randomColor());
         dots.addDot(newDot);
     }
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         int dotPosition = dots.findDot(x, y);
 
         if (dotPosition == -1) {
-            Dot newDot = new Dot(x, y, 50, new Colors().randomColor());
+            Dot newDot = new Dot(x, y, 50, Colors.randomColor());
             dots.addDot(newDot);
         } else {
             showAlertDialog(dotPosition);
