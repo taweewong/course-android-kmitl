@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
         final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
 
-        Button openActivity = (Button) findViewById(R.id.shareImage);
+        Button openActivity = (Button) findViewById(R.id.undoButton);
         openActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         int centerY = random.nextInt(dotView.getHeight());
         Dot newDot = new Dot(centerX, centerY, 30, new Colors().randomColor());
         dots.addDot(newDot);
+    }
+
+    public void onUndoDot(View view) {
+        dots.undo();
     }
 
     public void onClearDots(View view) {
