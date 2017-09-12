@@ -43,6 +43,13 @@ public class Dots {
         this.listener.onDotsChanged(this);
     }
 
+    public void undo() {
+        if (allDot != null && allDot.size() > 0) {
+            allDot.remove(allDot.size() - 1);
+            this.listener.onDotsChanged(this);
+        }
+    }
+
     public int findDot(int x, int y) {
         for (int i = 0; i < allDot.size(); i++) {
             int centerX = allDot.get(i).getCenterX();
