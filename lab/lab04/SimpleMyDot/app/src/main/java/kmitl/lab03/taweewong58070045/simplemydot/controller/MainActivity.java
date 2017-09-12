@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -41,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         initialize();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_menu, menu);
+        return true;
+    }
+
     private void initialize() {
         dotView = (DotView) findViewById(R.id.dotView);
         dotView.setListener(this);
@@ -66,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         });
     }
 
-    public void onCaptureScreen(View view) {
+    public void onCaptureScreen() {
         Bitmap bitmap = ScreenshotUtils.getScreenshot(dotView);
         File saveFilePath = ScreenshotUtils.getMainDirectoryName(this);
         File file = ScreenshotUtils.store(bitmap, "screenshot.jpg", saveFilePath);
@@ -145,6 +155,17 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
 
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                onCaptureScreen();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
