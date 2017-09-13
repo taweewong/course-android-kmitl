@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
     private DotView dotView;
     private Dots dots;
 
-    static final int EDIT_REQUEST = 1;
+    private final int EDIT_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
     }
 
     public void onCaptureScreen() {
-        Bitmap bitmap = ScreenshotUtils.getScreenshot(dotView);
-        File saveFilePath = ScreenshotUtils.getMainDirectoryName(this);
-        File file = ScreenshotUtils.store(bitmap, "screenshot.jpg", saveFilePath);
+        File file = ScreenshotUtils.store(ScreenshotUtils.getScreenshot(dotView),
+                "screenshot.jpg",
+                ScreenshotUtils.getMainDirectoryName(this));
         shareImageFile(file);
     }
 
@@ -157,10 +157,42 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         alertDialog.show();
     }
 
+    private void showAlertDialog2() {
+        final List<String> optionList = new ArrayList<>();
+        optionList.add("Edit");
+        optionList.add("Delete");
+        CharSequence[] options = optionList.toArray(new String[optionList.size()]);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("Edit or Delete ?");
+        dialogBuilder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0:
+
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+                showAlertDialog2();
                 onCaptureScreen();
                 return true;
             default:
