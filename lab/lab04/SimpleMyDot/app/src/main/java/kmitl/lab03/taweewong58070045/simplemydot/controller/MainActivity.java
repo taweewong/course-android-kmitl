@@ -157,42 +157,10 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         alertDialog.show();
     }
 
-    private void showAlertDialog2() {
-        final List<String> optionList = new ArrayList<>();
-        optionList.add("Edit");
-        optionList.add("Delete");
-        CharSequence[] options = optionList.toArray(new String[optionList.size()]);
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("Edit or Delete ?");
-        dialogBuilder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                switch (item) {
-                    case 0:
-
-                        break;
-                    case 1:
-
-                }
-            }
-        });
-        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.show();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                showAlertDialog2();
                 onCaptureScreen();
                 return true;
             default:
