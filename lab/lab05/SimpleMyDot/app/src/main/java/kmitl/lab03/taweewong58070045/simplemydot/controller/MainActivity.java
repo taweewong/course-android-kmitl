@@ -2,18 +2,16 @@ package kmitl.lab03.taweewong58070045.simplemydot.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
@@ -22,10 +20,9 @@ import java.util.List;
 import java.util.Random;
 
 import kmitl.lab03.taweewong58070045.simplemydot.R;
+import kmitl.lab03.taweewong58070045.simplemydot.fragment.DotViewFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Colors;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
-import kmitl.lab03.taweewong58070045.simplemydot.model.DotParcelable;
-import kmitl.lab03.taweewong58070045.simplemydot.model.DotSerializable;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dots;
 import kmitl.lab03.taweewong58070045.simplemydot.utility.ScreenshotUtils;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
@@ -42,9 +39,6 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-
         initialize();
     }
 
@@ -60,6 +54,21 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         dotView.setListener(this);
         dots = new Dots();
         dots.setListener(this);
+        initialFragment();
+        setStrictMode();
+    }
+
+    private void setStrictMode() {
+        //Fix error when use Uri on Android Oreo
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+    }
+
+    private void initialFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, new DotViewFragment())
+                .commit();
     }
 
     public void onCaptureScreen() {
