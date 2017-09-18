@@ -62,24 +62,6 @@ public class MainActivity extends AppCompatActivity implements Dots.OnDotsChange
         dots.setListener(this);
     }
 
-    public void onOpenActivity(View view) {
-        //Code in Workshop Week04
-        final DotSerializable dotSerializable = new DotSerializable(150, 150, 30, Color.RED);
-        final DotParcelable dotParcelable = new DotParcelable(250, 250, 35, Color.RED);
-
-        Button openActivity = (Button) findViewById(R.id.undoButton);
-        openActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("x", 10);
-                intent.putExtra("dotSerializable", dotSerializable);
-                intent.putExtra("dotParcelable", dotParcelable);
-                startActivity(intent);
-            }
-        });
-    }
-
     public void onCaptureScreen() {
         File file = ScreenshotUtils.store(ScreenshotUtils.getScreenshot(dotView),
                 "screenshot.jpg",
