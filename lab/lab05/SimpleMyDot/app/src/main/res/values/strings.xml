@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SimpleMyDot</string>
+    <string name="random_dot">RANDOM DOT</string>
+    <string name="clear">CLEAR</string>
+    <string name="open_activity">open activity</string>
+    <string name="edit_dot_preview">Preview :</string>
+    <string name="edit_dot_color">Color :</string>
+    <string name="edit_dot_radius">Radius :</string>
+    <string name="apply_button">Apply</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="undo_button">Undo</string>
+</resources>
