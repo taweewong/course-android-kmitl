@@ -1,15 +1,48 @@
 package kmitl.lab03.taweewong58070045.simplemydot.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dots {
+public class Dots implements Parcelable{
     public interface OnDotsChangedListener {
         void onDotsChanged(Dots dots);
     }
 
     private List<Dot> allDot = new ArrayList<>();
     private OnDotsChangedListener listener;
+
+    public Dots() {
+
+    }
+
+    protected Dots(Parcel in) {
+        allDot = in.createTypedArrayList(Dot.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(allDot);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Dots> CREATOR = new Creator<Dots>() {
+        @Override
+        public Dots createFromParcel(Parcel in) {
+            return new Dots(in);
+        }
+
+        @Override
+        public Dots[] newArray(int size) {
+            return new Dots[size];
+        }
+    };
 
     public List<Dot> getAllDot() {
         return allDot;
