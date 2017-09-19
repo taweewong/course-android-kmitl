@@ -14,10 +14,11 @@ import android.view.MenuItem;
 import java.io.File;
 
 import kmitl.lab03.taweewong58070045.simplemydot.R;
+import kmitl.lab03.taweewong58070045.simplemydot.fragment.EditDotFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.fragment.MainFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener{
 
     private final int EDIT_REQUEST = 1;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, MainFragment.newInstance())
+                .add(R.id.fragmentContainer, MainFragment.newInstance(this))
                 .commit();
     }
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -99,10 +101,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startEditDotActivity(Dot dot, int dotPosition) {
-        Intent intent = new Intent(MainActivity.this, EditDotActivity.class);
-        intent.putExtra("dot", dot);
-        intent.putExtra("dotPosition", dotPosition);
-        startActivityForResult(intent, EDIT_REQUEST);
+    @Override
+    public void onDotSelect(Dot dot, int position) {
+        updateFragment(EditDotFragment.newInstance(dot, position));
     }
 }
