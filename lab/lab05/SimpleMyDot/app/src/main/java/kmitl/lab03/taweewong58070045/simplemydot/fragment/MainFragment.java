@@ -29,11 +29,22 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         // Required empty public constructor
     }
 
+    public static MainFragment newInstance() {
+        Bundle args = new Bundle();
+        MainFragment fragment = new MainFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dots = new Dots();
+        if (savedInstanceState != null) {
+            dots = savedInstanceState.getParcelable("dots");
+        } else {
+            dots = new Dots();
+        }
         dots.setListener(this);
     }
 
@@ -57,8 +68,9 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            dots = savedInstanceState.getParcelable("dots");
+            dotView.setDots(dots);
         }
+        dotView.invalidate();
     }
 
     private void initialView(View rootView) {
