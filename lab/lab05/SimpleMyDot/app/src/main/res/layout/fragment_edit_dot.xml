@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.lab03.taweewong58070045.simplemydot.controller.EditDotActivity">
+    tools:context="kmitl.lab03.taweewong58070045.simplemydot.fragment.EditDotFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
