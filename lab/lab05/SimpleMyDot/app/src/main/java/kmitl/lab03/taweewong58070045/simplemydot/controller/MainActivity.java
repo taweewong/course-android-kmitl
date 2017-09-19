@@ -18,7 +18,7 @@ import kmitl.lab03.taweewong58070045.simplemydot.fragment.EditDotFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.fragment.MainFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener{
+public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener, EditDotFragment.OnDotUpdatedListener{
 
     private final int EDIT_REQUEST = 1;
 
@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
 
     @Override
     public void onDotSelect(Dot dot, int position) {
-        updateFragment(EditDotFragment.newInstance(dot, position));
+        updateFragment(EditDotFragment.newInstance(dot, position, this));
+    }
+
+    @Override
+    public void onDotUpdate(Dot dot, int position) {
+        getSupportFragmentManager().popBackStack();
     }
 }
