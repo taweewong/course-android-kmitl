@@ -26,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initialize();
+        if (savedInstanceState == null) {
+            initialFragment();
+        }
+        setStrictMode();
     }
 
     @Override
@@ -34,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_menu, menu);
         return true;
-    }
-
-    private void initialize() {
-        initialFragment();
-        setStrictMode();
     }
 
     private void setStrictMode() {
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, new MainFragment())
+                .add(R.id.fragmentContainer, MainFragment.newInstance())
                 .commit();
     }
 
