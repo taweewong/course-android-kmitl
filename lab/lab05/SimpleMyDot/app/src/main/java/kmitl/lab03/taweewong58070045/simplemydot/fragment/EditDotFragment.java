@@ -20,19 +20,25 @@ import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotPreview;
 
 public class EditDotFragment extends Fragment implements View.OnClickListener {
+    public interface OnDotUpdatedListener {
+        void onDotUpdate(Dot dot, int position);
+    }
+
     Button colorPickerButton;
     EditText radiusEditText;
     DotPreview dotPreview;
     Dot dot;
     int dotPosition;
+    OnDotUpdatedListener listener;
 
     public EditDotFragment() {
         // Required empty public constructor
     }
 
-    public static EditDotFragment newInstance(Dot dot, int dotPosition) {
+    public static EditDotFragment newInstance(Dot dot, int dotPosition, OnDotUpdatedListener listener) {
         Bundle args = new Bundle();
         EditDotFragment fragment = new EditDotFragment();
+        fragment.setListener(listener);
         args.putParcelable("dot", dot);
         args.putInt("dotPosition", dotPosition);
         fragment.setArguments(args);
@@ -95,7 +101,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
 
     public void onClickConfirm() {
         updateDot(dot.getColor(), getInputRadius());
-//        returnDot();
+        listener.onDotUpdate(dot, dotPosition);
     }
 
     public void onClickCancel() {
@@ -144,11 +150,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         return Integer.parseInt(radiusEditText.getText().toString());
     }
 
-//    private void returnDot() {
-//        Intent returnIntent = new Intent();
-//        returnIntent.putExtra("dot", dot);
-//        returnIntent.putExtra("dotPosition", dotPosition);
-//        setResult(RESULT_OK, returnIntent);
-//        finish();
-//    }
+    public void setListener(OnDotUpdatedListener listener) {
+        this.listener = listener;
+    }
 }
