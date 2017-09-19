@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import java.io.File;
 
 import kmitl.lab03.taweewong58070045.simplemydot.R;
-import kmitl.lab03.taweewong58070045.simplemydot.fragment.DotViewFragment;
+import kmitl.lab03.taweewong58070045.simplemydot.fragment.MainFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, new DotViewFragment())
+                .add(R.id.fragmentContainer, new MainFragment())
                 .commit();
     }
 

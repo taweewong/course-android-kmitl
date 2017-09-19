@@ -21,11 +21,11 @@ import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dots;
 import kmitl.lab03.taweewong58070045.simplemydot.view.DotView;
 
-public class DotViewFragment extends Fragment implements DotView.OnDotViewPressListener, Dots.OnDotsChangedListener, View.OnClickListener {
+public class MainFragment extends Fragment implements DotView.OnDotViewPressListener, Dots.OnDotsChangedListener, View.OnClickListener {
     private Dots dots;
     private DotView dotView;
 
-    public DotViewFragment() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
