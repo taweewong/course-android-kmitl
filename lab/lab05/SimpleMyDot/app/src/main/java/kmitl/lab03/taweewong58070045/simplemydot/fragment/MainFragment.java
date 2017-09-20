@@ -29,10 +29,9 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         // Required empty public constructor
     }
 
-    public static MainFragment newInstance(OnDotSelectListener listener) {
+    public static MainFragment newInstance() {
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
-        fragment.setListener(listener);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +46,7 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
             dots = new Dots();
         }
         dots.setListener(this);
+        listener = (OnDotSelectListener) getActivity();
     }
 
     @Override
