@@ -12,8 +12,6 @@ import kmitl.lab03.taweewong58070045.simplemydot.fragment.MainFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener, EditDotFragment.OnDotUpdatedListener{
-
-    private final int EDIT_REQUEST = 1;
     private final String MAIN_FRAGMENT_TAG = "MainFragmentTag";
 
     @Override
