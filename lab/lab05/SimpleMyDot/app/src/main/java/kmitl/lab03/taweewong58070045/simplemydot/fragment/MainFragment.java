@@ -181,7 +181,4 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         dots.clearAll();
     }
 
-    public void updateEditDotByPosition(Dot dot, int position) {
-        dots.setDot(position, dot);
-    }
 }
