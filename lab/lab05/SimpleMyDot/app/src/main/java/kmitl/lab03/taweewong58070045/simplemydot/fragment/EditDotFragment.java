@@ -28,6 +28,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
     EditText radiusEditText;
     DotPreview dotPreview;
     Dot dot;
+    Dot previewDot;
     int dotPosition;
     OnDotUpdatedListener listener;
 
@@ -49,8 +50,11 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         dot = getArguments().getParcelable("dot");
+        previewDot = new Dot(dot.getCenterX(), dot.getCenterY(), dot.getRadius(), dot.getColor());
         dotPosition = getArguments().getInt("dotPosition");
         listener = (OnDotUpdatedListener) getActivity();
+
+        cloneDot(previewDot, dot);
     }
 
     @Override
@@ -69,7 +73,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         Button applyButton = (Button) rootView.findViewById(R.id.applyButton);
         Button confirmButton = (Button) rootView.findViewById(R.id.confirmButton);
 
-        dotPreview.setDot(dot);
+        dotPreview.setDot(previewDot);
         colorPickerButton.setBackgroundColor(dot.getColor());
         colorPickerButton.setOnClickListener(this);
         radiusEditText.setText(String.valueOf(dot.getRadius()));
@@ -100,16 +104,16 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClickConfirm() {
-        updateDot(dot.getColor(), getInputRadius());
+        updateDot(dot, previewDot.getColor(), getInputRadius());
         listener.onDotUpdate(dot, dotPosition);
     }
 
     public void onClickCancel() {
-//        finish();
+        listener.onDotUpdate(dot, dotPosition);
     }
 
     public void onClickApply() {
-        updateDot(dot.getColor(), getInputRadius());
+        updateDot(previewDot, previewDot.getColor(), getInputRadius());
         dotPreview.invalidate();
     }
 
@@ -117,7 +121,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         ColorPickerDialogBuilder
                 .with(getContext())
                 .setTitle("Choose color")
-                .initialColor(dot.getColor())
+                .initialColor(previewDot.getColor())
                 .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                 .density(12)
                 .setOnColorSelectedListener(new OnColorSelectedListener() {
@@ -129,7 +133,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                         colorPickerButton.setBackgroundColor(selectedColor);
-                        updateDot(selectedColor, dot.getRadius());
+                        updateDot(previewDot, selectedColor, previewDot.getRadius());
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -141,7 +145,14 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
                 .show();
     }
 
-    private void updateDot(int color, int radius) {
+    private void cloneDot(Dot cloneDot, Dot refDot) {
+        cloneDot.setRadius(refDot.getRadius());
+        cloneDot.setColor(refDot.getColor());
+        cloneDot.setCenterX(refDot.getCenterX());
+        cloneDot.setCenterY(refDot.getCenterY());
+    }
+
+    private void updateDot(Dot dot, int color, int radius) {
         dot.setColor(color);
         dot.setRadius(radius);
     }
