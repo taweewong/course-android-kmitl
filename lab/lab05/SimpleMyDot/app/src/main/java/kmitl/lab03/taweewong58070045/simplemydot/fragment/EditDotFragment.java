@@ -35,10 +35,9 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-    public static EditDotFragment newInstance(Dot dot, int dotPosition, OnDotUpdatedListener listener) {
+    public static EditDotFragment newInstance(Dot dot, int dotPosition) {
         Bundle args = new Bundle();
         EditDotFragment fragment = new EditDotFragment();
-        fragment.setListener(listener);
         args.putParcelable("dot", dot);
         args.putInt("dotPosition", dotPosition);
         fragment.setArguments(args);
@@ -49,8 +48,9 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            dot = getArguments().getParcelable("dot");
-            dotPosition = getArguments().getInt("dotPosition");
+        dot = getArguments().getParcelable("dot");
+        dotPosition = getArguments().getInt("dotPosition");
+        listener = (OnDotUpdatedListener) getActivity();
     }
 
     @Override
