@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
     @Override
     public void onDotUpdate(Dot dot, int position) {
         getSupportFragmentManager().popBackStack();
-        MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAGMENT_TAG);
-        fragment.updateEditDotByPosition(dot, position);
+
     }
 }
