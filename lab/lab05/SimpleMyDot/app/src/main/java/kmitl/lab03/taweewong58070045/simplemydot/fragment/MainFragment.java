@@ -68,10 +68,7 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            dotView.setDots(dots);
-        }
-
+        dotView.setDots(dots);
     }
 
     private void initialView(View rootView) {
@@ -176,7 +173,7 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         dots.clearAll();
     }
 
-    public void setListener(OnDotSelectListener listener) {
-        this.listener = listener;
+    public void updateEditDotByPosition(Dot dot, int position) {
+        dots.setDot(position, dot);
     }
 }
