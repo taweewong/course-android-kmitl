@@ -7,8 +7,6 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.io.File;
@@ -21,6 +19,7 @@ import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener, EditDotFragment.OnDotUpdatedListener{
 
     private final int EDIT_REQUEST = 1;
+    private final String MAIN_FRAGMENT_TAG = "MainFragmentTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
         setStrictMode();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_menu, menu);
-        return true;
-    }
-
     private void setStrictMode() {
         //Fix error when use Uri on Android Oreo
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -49,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
     private void initialFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, MainFragment.newInstance(this))
+                .add(R.id.fragmentContainer, MainFragment.newInstance(), MAIN_FRAGMENT_TAG)
                 .commit();
     }
 
@@ -103,11 +95,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
 
     @Override
     public void onDotSelect(Dot dot, int position) {
-        updateFragment(EditDotFragment.newInstance(dot, position, this));
+        updateFragment(EditDotFragment.newInstance(dot, position));
     }
 
     @Override
     public void onDotUpdate(Dot dot, int position) {
         getSupportFragmentManager().popBackStack();
+        MainFragment fragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAGMENT_TAG);
+        fragment.updateEditDotByPosition(dot, position);
     }
 }
