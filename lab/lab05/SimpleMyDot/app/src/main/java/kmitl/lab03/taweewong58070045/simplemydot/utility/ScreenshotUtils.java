@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class ScreenshotUtils {
-    public static Bitmap getScreenshot(View view) {
+    private static Bitmap getScreenshot(View view) {
         View screenView = view.getRootView();
         screenView.setDrawingCacheEnabled(true);
         Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
@@ -19,7 +19,7 @@ public class ScreenshotUtils {
         return bitmap;
     }
 
-    public static File getMainDirectoryName(Context context) {
+    private static File getMainDirectoryName(Context context) {
         File mainDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "SimpleMyDot");
 
         if (!mainDir.exists()) {
@@ -30,7 +30,7 @@ public class ScreenshotUtils {
         return mainDir;
     }
 
-    public static File store(Bitmap bm, String fileName, File saveFilePath) {
+    private static File store(Bitmap bm, String fileName, File saveFilePath) {
         File dir = new File(saveFilePath.getAbsolutePath());
         if (!dir.exists()) {
             dir.mkdirs();
@@ -45,5 +45,9 @@ public class ScreenshotUtils {
             e.printStackTrace();
         }
         return file;
+    }
+
+    public static File captureScreen(View screenView, String fileName, Context context) {
+        return store(getScreenshot(screenView), fileName, getMainDirectoryName(context));
     }
 }

@@ -98,9 +98,7 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
     }
 
     public void onCaptureScreen() {
-        File file = ScreenshotUtils.store(ScreenshotUtils.getScreenshot(dotView),
-                "screenshot.jpg",
-                ScreenshotUtils.getMainDirectoryName(getActivity()));
+        File file = ScreenshotUtils.captureScreen(dotView, "screenshot.jpg", getActivity());
         shareImageFile(file);
     }
 
