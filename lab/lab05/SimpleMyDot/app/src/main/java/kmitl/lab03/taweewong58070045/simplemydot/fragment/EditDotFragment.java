@@ -54,9 +54,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         dot = getArguments().getParcelable("dot");
         previewDot = new Dot(dot.getCenterX(), dot.getCenterY(), dot.getRadius(), dot.getColor());
         dotPosition = getArguments().getInt("dotPosition");
-        listener = (OnDotUpdatedListener) getActivity();
-
-        cloneDot(previewDot, dot);
+        setOnDotUpdatedListener((OnDotUpdatedListener) getActivity());
     }
 
     @Override
@@ -151,13 +149,6 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
                 .show();
     }
 
-    private void cloneDot(Dot cloneDot, Dot refDot) {
-        cloneDot.setRadius(refDot.getRadius());
-        cloneDot.setColor(refDot.getColor());
-        cloneDot.setCenterX(refDot.getCenterX());
-        cloneDot.setCenterY(refDot.getCenterY());
-    }
-
     private void updateDot(Dot dot, int color, int radius) {
         dot.setColor(color);
         dot.setRadius(radius);
@@ -180,5 +171,9 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
 
     private int getInputPositionY() {
         return Integer.parseInt(positionYEditText.getText().toString());
+    }
+
+    private void setOnDotUpdatedListener(OnDotUpdatedListener listener) {
+        this.listener = listener;
     }
 }
