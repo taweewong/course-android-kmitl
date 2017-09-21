@@ -28,6 +28,8 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         void onDotSelect(Dot dot, int position);
     }
 
+    private static final String KEY_DOTS = "dots";
+
     private Dots dots;
     private DotView dotView;
     private OnDotSelectListener listener;
@@ -54,12 +56,13 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            dots = savedInstanceState.getParcelable("dots");
+            dots = savedInstanceState.getParcelable(KEY_DOTS);
         } else {
             dots = new Dots();
         }
-        dots.setListener(this);
-        listener = (OnDotSelectListener) getActivity();
+
+        if (dots != null) { dots.setListener(this); }
+        setOnDotSelectListener((OnDotSelectListener) getActivity());
     }
 
     @Override
@@ -75,7 +78,7 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putParcelable("dots", dots);
+        outState.putParcelable(KEY_DOTS, dots);
     }
 
     @Override
@@ -177,6 +180,10 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
 
     public void onClearDots() {
         dots.clearAll();
+    }
+
+    private void setOnDotSelectListener(OnDotSelectListener listener) {
+        this.listener = listener;
     }
 
 }
