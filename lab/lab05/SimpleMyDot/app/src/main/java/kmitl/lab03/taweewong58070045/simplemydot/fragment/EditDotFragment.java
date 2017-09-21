@@ -27,6 +27,8 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
     Button colorPickerButton;
     EditText radiusEditText;
     DotPreview dotPreview;
+    EditText positionXEditText;
+    EditText positionYEditText;
     Dot dot;
     Dot previewDot;
     int dotPosition;
@@ -69,14 +71,18 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         dotPreview = (DotPreview) rootView.findViewById(R.id.editDotView);
         colorPickerButton = (Button) rootView.findViewById(R.id.colorPickerButton);
         radiusEditText = (EditText) rootView.findViewById(R.id.radiusEditText);
+        positionXEditText = (EditText) rootView.findViewById(R.id.positionXEditText);
+        positionYEditText = (EditText) rootView.findViewById(R.id.positionYEditText);
         Button cancelButton = (Button) rootView.findViewById(R.id.cancelButton);
         Button applyButton = (Button) rootView.findViewById(R.id.applyButton);
         Button confirmButton = (Button) rootView.findViewById(R.id.confirmButton);
 
         dotPreview.setDot(previewDot);
-        colorPickerButton.setBackgroundColor(dot.getColor());
+        colorPickerButton.setBackgroundColor(previewDot.getColor());
         colorPickerButton.setOnClickListener(this);
-        radiusEditText.setText(String.valueOf(dot.getRadius()));
+        radiusEditText.setText(String.valueOf(previewDot.getRadius()));
+        positionXEditText.setText(String.valueOf(previewDot.getCenterX()));
+        positionYEditText.setText(String.valueOf(previewDot.getCenterY()));
         cancelButton.setOnClickListener(this);
         applyButton.setOnClickListener(this);
         confirmButton.setOnClickListener(this);
@@ -104,7 +110,7 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClickConfirm() {
-        updateDot(dot, previewDot.getColor(), getInputRadius());
+        updateDot(dot, previewDot.getColor(), getInputRadius(), getInputPositionX(), getInputPositionY());
         listener.onDotUpdate(dot, dotPosition);
     }
 
@@ -157,11 +163,22 @@ public class EditDotFragment extends Fragment implements View.OnClickListener {
         dot.setRadius(radius);
     }
 
+    private void updateDot(Dot dot, int color, int radius, int centerX, int centerY) {
+        dot.setColor(color);
+        dot.setRadius(radius);
+        dot.setCenterX(centerX);
+        dot.setCenterY(centerY);
+    }
+
     private int getInputRadius() {
         return Integer.parseInt(radiusEditText.getText().toString());
     }
 
-    public void setListener(OnDotUpdatedListener listener) {
-        this.listener = listener;
+    private int getInputPositionX() {
+        return Integer.parseInt(positionXEditText.getText().toString());
+    }
+
+    private int getInputPositionY() {
+        return Integer.parseInt(positionYEditText.getText().toString());
     }
 }
