@@ -6,6 +6,8 @@
     <string name="edit_dot_preview">Preview :</string>
     <string name="edit_dot_color">Color :</string>
     <string name="edit_dot_radius">Radius :</string>
+    <string name="edit_dot_position_x">Position X :</string>
+    <string name="edit_dot_position_y">Position Y :</string>
     <string name="apply_button">Apply</string>
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
