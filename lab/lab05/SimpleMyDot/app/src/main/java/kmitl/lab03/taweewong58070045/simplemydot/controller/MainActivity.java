@@ -12,7 +12,6 @@ import kmitl.lab03.taweewong58070045.simplemydot.fragment.MainFragment;
 import kmitl.lab03.taweewong58070045.simplemydot.model.Dot;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnDotSelectListener, EditDotFragment.OnDotUpdatedListener{
-    private final String MAIN_FRAGMENT_TAG = "MainFragmentTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
 
     private void initialFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        String MAIN_FRAGMENT_TAG = "MainFragmentTag";
         fragmentManager.beginTransaction()
                 .add(R.id.fragmentContainer, MainFragment.newInstance(), MAIN_FRAGMENT_TAG)
                 .commit();
@@ -54,6 +54,5 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnDo
     @Override
     public void onDotUpdate(Dot dot, int position) {
         getSupportFragmentManager().popBackStack();
-
     }
 }
