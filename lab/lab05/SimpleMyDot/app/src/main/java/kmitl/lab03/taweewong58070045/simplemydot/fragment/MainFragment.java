@@ -147,6 +147,17 @@ public class MainFragment extends Fragment implements DotView.OnDotViewPressList
     }
 
     @Override
+    public void onDotViewDrag(int x, int y, boolean isDragging) {
+        int dotPosition = dots.findDot(x, y);
+
+        if (dotPosition != -1 && isDragging) {
+            dots.getDot(dotPosition).setCenterX(x);
+            dots.getDot(dotPosition).setCenterY(y);
+            dotView.invalidate();
+        }
+    }
+
+    @Override
     public void onDotsChanged(Dots dots) {
         dotView.setDots(dots);
         dotView.invalidate();
