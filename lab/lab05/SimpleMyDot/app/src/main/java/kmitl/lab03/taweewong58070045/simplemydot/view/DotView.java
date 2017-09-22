@@ -16,6 +16,7 @@ public class DotView extends View {
     public interface OnDotViewPressListener {
         void onDotViewPressed(int x, int y);
         void onDotViewLongPressed(int x, int y);
+        void onDotViewDrag(int x, int y, boolean isDragging);
     }
 
     private Paint paint;
@@ -70,6 +71,13 @@ public class DotView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                listener.onDotViewDrag((int) event.getX(), (int) event.getY(), true);
+                break;
+            case MotionEvent.ACTION_UP:
+                listener.onDotViewDrag((int) event.getX(), (int) event.getY(), false);
+        }
         return gestureDetector.onTouchEvent(event);
     }
 
