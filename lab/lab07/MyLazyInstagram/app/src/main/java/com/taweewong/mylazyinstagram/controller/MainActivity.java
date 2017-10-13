@@ -12,6 +12,7 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.taweewong.mylazyinstagram.R;
+import com.taweewong.mylazyinstagram.adapter.LargePostAdapter;
 import com.taweewong.mylazyinstagram.adapter.PostAdapter;
 import com.taweewong.mylazyinstagram.api.LazyInstragramAPI;
 import com.taweewong.mylazyinstagram.model.Post;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity{
     RecyclerView recyclerView;
     ToggleButton linearViewButton;
     ToggleButton gridViewButton;
+    PostAdapter postAdapter;
+    LargePostAdapter largePostAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if (linearViewButton.isChecked()) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(largePostAdapter);
                     disable(linearViewButton);
                     toggle(gridViewButton);
                 }
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
                 if (gridViewButton.isChecked()) {
                     recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
                     disable(gridViewButton);
+                    recyclerView.setAdapter(postAdapter);
                     toggle(linearViewButton);
                 }
             }
@@ -100,7 +105,9 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void setMainActivityAdapter(Post[] posts) {
-        PostAdapter postAdapter = new PostAdapter(MainActivity.this, posts);
+        postAdapter = new PostAdapter(MainActivity.this, posts);
+        largePostAdapter = new LargePostAdapter(MainActivity.this, posts);
+
         recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
         recyclerView.setAdapter(postAdapter);
