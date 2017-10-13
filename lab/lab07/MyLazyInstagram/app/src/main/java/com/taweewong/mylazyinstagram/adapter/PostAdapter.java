@@ -6,18 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.taweewong.mylazyinstagram.R;
 import com.taweewong.mylazyinstagram.model.Post;
 
 class Holder extends RecyclerView.ViewHolder {
+    ImageView image;
+    TextView likeText;
+    TextView commentText;
 
-    public ImageView image;
-
-    public Holder(View itemView) {
+    Holder(View itemView) {
         super(itemView);
         image = itemView.findViewById(R.id.postImage);
+        likeText = itemView.findViewById(R.id.likeText);
+        commentText = itemView.findViewById(R.id.commentText);
     }
 }
 
@@ -42,7 +46,12 @@ public class PostAdapter extends RecyclerView.Adapter<Holder>{
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         ImageView image = holder.image;
+        TextView likeText = holder.likeText;
+        TextView commentText = holder.commentText;
+
         Glide.with(context).load(posts[position].getUrl()).into(image);
+        likeText.setText(String.valueOf(posts[position].getLike()));
+        commentText.setText(String.valueOf(posts[position].getComment()));
     }
 
     @Override
