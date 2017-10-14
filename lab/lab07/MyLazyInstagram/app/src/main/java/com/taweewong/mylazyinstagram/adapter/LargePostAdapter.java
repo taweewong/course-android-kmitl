@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.taweewong.mylazyinstagram.R;
 import com.taweewong.mylazyinstagram.model.Post;
+import com.taweewong.mylazyinstagram.model.UserProfile;
 
 class LargePostViewHolder extends RecyclerView.ViewHolder {
     ImageView userImageSmall;
@@ -31,11 +32,15 @@ class LargePostViewHolder extends RecyclerView.ViewHolder {
 
 public class LargePostAdapter extends RecyclerView.Adapter<LargePostViewHolder>{
     private Context context;
+    private String urlProfile;
+    private String user;
     private Post[] posts;
 
-    public LargePostAdapter(Context context, Post[] posts) {
+    public LargePostAdapter(Context context, UserProfile userProfile) {
         this.context = context;
-        this.posts = posts;
+        this.posts = userProfile.getPosts();
+        this.urlProfile = userProfile.getUrlProfile();
+        this.user = userProfile.getUser();
     }
 
     @Override
@@ -55,8 +60,8 @@ public class LargePostAdapter extends RecyclerView.Adapter<LargePostViewHolder>{
         TextView likeTextSmall = holder.likeTextSmall;
         TextView commentTextSmall = holder.commentTextSmall;
 
-        Glide.with(context).load("http://cf.c.ooyala.com/c0MDgyYjE6pFQaWHF7dbJzqtDYo4p17q/promo318116930").into(userImageSmall);
-
+        Glide.with(context).load(urlProfile).into(userImageSmall);
+        usernameTextViewSmall.setText(user);
         Glide.with(context).load(posts[position].getUrl()).into(postImageLarge);
         likeTextSmall.setText(posts[position].getLike() + " likes");
         commentTextSmall.setText(posts[position].getComment() + " comments");
