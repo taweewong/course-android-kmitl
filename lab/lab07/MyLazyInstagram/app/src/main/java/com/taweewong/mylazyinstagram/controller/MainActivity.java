@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
                     UserProfile userProfile = response.body();
 
                     setMainActivityDisplay(userProfile);
-                    setMainActivityAdapter(userProfile.getPosts());
+                    setMainActivityAdapter(userProfile);
                 }
             }
 
@@ -104,9 +104,9 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void setMainActivityAdapter(Post[] posts) {
-        postAdapter = new PostAdapter(MainActivity.this, posts);
-        largePostAdapter = new LargePostAdapter(MainActivity.this, posts);
+    private void setMainActivityAdapter(UserProfile userProfile) {
+        postAdapter = new PostAdapter(MainActivity.this, userProfile.getPosts());
+        largePostAdapter = new LargePostAdapter(MainActivity.this, userProfile);
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
