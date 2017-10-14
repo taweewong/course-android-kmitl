@@ -1,10 +1,14 @@
 package com.taweewong.mylazyinstagram.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +40,14 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getUserProfile("cartoon");
+
+        String username = getIntent().getStringExtra("username");
+
+        if (username == null) {
+            username = "android";
+        }
+
+        getUserProfile(username);
 
         linearViewButton = findViewById(R.id.linearViewButton);
         gridViewButton = findViewById(R.id.gridViewButton);
@@ -64,6 +75,24 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.switch_user, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_switch) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("username", "cartoon");
+            startActivity(intent);
+            finish();
+        }
+        return true;
     }
 
     private void toggle(ToggleButton toggleButton) {
