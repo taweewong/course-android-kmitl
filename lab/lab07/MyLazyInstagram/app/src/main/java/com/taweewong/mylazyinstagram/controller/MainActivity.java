@@ -1,7 +1,6 @@
 package com.taweewong.mylazyinstagram.controller;
 
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     ToggleButton listViewButton;
     ToggleButton gridViewButton;
@@ -146,20 +145,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.gridViewButton:
-                if (listViewButton.isChecked()) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-                    recyclerView.setAdapter(largePostAdapter);
-                    disable(listViewButton);
-                    toggle(gridViewButton);
-                }
+                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
+                recyclerView.setAdapter(postAdapter);
+                disable(gridViewButton);
+                toggle(listViewButton);
                 break;
             case R.id.listViewButton:
-                if (gridViewButton.isChecked()) {
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
-                    recyclerView.setAdapter(postAdapter);
-                    disable(gridViewButton);
-                    toggle(listViewButton);
-                }
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+                recyclerView.setAdapter(largePostAdapter);
+                disable(listViewButton);
+                toggle(gridViewButton);
         }
     }
 }

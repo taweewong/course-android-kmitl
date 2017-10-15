@@ -183,6 +183,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:checked="true"
+            android:enabled="false"
             android:textAllCaps="false"
             android:textColor="@color/grid_view_button_color"
             android:textOff="@string/grid_button"
