@@ -47,9 +47,8 @@ public class LargePostAdapter extends RecyclerView.Adapter<LargePostViewHolder>{
     public LargePostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.post_large_item, parent, false);
-        LargePostViewHolder holder = new LargePostViewHolder(itemView);
 
-        return holder;
+        return new LargePostViewHolder(itemView);
     }
 
     @Override
@@ -63,8 +62,8 @@ public class LargePostAdapter extends RecyclerView.Adapter<LargePostViewHolder>{
         Glide.with(context).load(urlProfile).into(userImageSmall);
         usernameTextViewSmall.setText(user);
         Glide.with(context).load(posts[position].getUrl()).into(postImageLarge);
-        likeTextSmall.setText(posts[position].getLike() + " likes");
-        commentTextSmall.setText(posts[position].getComment() + " comments");
+        likeTextSmall.setText(context.getString(R.string.post_like, posts[position].getLike()));
+        commentTextSmall.setText(context.getString(R.string.post_comment, posts[position].getComment()));
     }
 
     @Override

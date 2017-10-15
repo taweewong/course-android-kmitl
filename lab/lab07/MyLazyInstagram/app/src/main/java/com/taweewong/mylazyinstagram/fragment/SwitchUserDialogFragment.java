@@ -34,7 +34,6 @@ public class SwitchUserDialogFragment extends DialogFragment implements View.OnC
     }
 
     public static SwitchUserDialogFragment newInstance(String currentUser) {
-
         Bundle args = new Bundle();
 
         SwitchUserDialogFragment fragment = new SwitchUserDialogFragment();
@@ -54,6 +53,12 @@ public class SwitchUserDialogFragment extends DialogFragment implements View.OnC
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_switch_user_dialog, container, false);
 
+        initializeView(rootView);
+
+        return rootView;
+    }
+
+    private void initializeView(View rootView) {
         imageSelect1 = rootView.findViewById(R.id.userImageSelect1);
         imageSelect2 = rootView.findViewById(R.id.userImageSelect2);
         imageSelect3 = rootView.findViewById(R.id.userImageSelect3);
@@ -90,8 +95,6 @@ public class SwitchUserDialogFragment extends DialogFragment implements View.OnC
             case "cartoon":
                 imageSelect3.setBorderColor(ContextCompat.getColor(getActivity(), R.color.green));
         }
-
-        return rootView;
     }
 
     @Override
@@ -105,19 +108,6 @@ public class SwitchUserDialogFragment extends DialogFragment implements View.OnC
                 break;
             case R.id.selectUserLayout3:
                 startMainActivity("cartoon");
-        }
-    }
-
-    private void setCurrentUser(String currentUser) {
-        switch (currentUser) {
-            case "android":
-                imageSelect1.setBorderColor(ContextCompat.getColor(getActivity(), R.color.green));
-                break;
-            case "natural":
-                imageSelect2.setBorderColor(ContextCompat.getColor(getActivity(), R.color.green));
-                break;
-            case "cartoon":
-                imageSelect3.setBorderColor(ContextCompat.getColor(getActivity(), R.color.green));
         }
     }
 

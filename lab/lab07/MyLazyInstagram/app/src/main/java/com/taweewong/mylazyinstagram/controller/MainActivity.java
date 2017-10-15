@@ -1,6 +1,7 @@
 package com.taweewong.mylazyinstagram.controller;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,9 +30,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     RecyclerView recyclerView;
-    ToggleButton linearViewButton;
+    ToggleButton listViewButton;
     ToggleButton gridViewButton;
     PostAdapter postAdapter;
     LargePostAdapter largePostAdapter;
@@ -42,40 +43,14 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        username = getIntent().getStringExtra("username");
-
-        if (username == null) {
-            username = "android";
-        }
-
+        username = getUsername();
         getUserProfile(username);
 
-        linearViewButton = findViewById(R.id.linearViewButton);
+        listViewButton = findViewById(R.id.listViewButton);
         gridViewButton = findViewById(R.id.gridViewButton);
 
-        linearViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearViewButton.isChecked()) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-                    recyclerView.setAdapter(largePostAdapter);
-                    disable(linearViewButton);
-                    toggle(gridViewButton);
-                }
-            }
-        });
-
-        gridViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (gridViewButton.isChecked()) {
-                    recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
-                    disable(gridViewButton);
-                    recyclerView.setAdapter(postAdapter);
-                    toggle(linearViewButton);
-                }
-            }
-        });
+        listViewButton.setOnClickListener(this);
+        gridViewButton.setOnClickListener(this);
     }
 
     @Override
@@ -89,11 +64,20 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_switch) {
             FragmentManager fragmentManager = getFragmentManager();
-            SwitchUserDialogFragment dialogFragment = new SwitchUserDialogFragment();
-            dialogFragment.newInstance(username)
+            SwitchUserDialogFragment.newInstance(username)
                 .show(fragmentManager, "Switcher User");
         }
         return true;
+    }
+
+    private String getUsername() {
+        String username = getIntent().getStringExtra("username");
+
+        if (username == null) {
+            return "android";
+        }
+
+        return username;
     }
 
     private void toggle(ToggleButton toggleButton) {
@@ -156,5 +140,26 @@ public class MainActivity extends AppCompatActivity{
         followerTextView.setText(String.valueOf(userProfile.getFollower()));
         followingTextView.setText(String.valueOf(userProfile.getFollowing()));
         bioTextView.setText(userProfile.getBio());
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.gridViewButton:
+                if (listViewButton.isChecked()) {
+                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(largePostAdapter);
+                    disable(listViewButton);
+                    toggle(gridViewButton);
+                }
+                break;
+            case R.id.listViewButton:
+                if (gridViewButton.isChecked()) {
+                    recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
+                    recyclerView.setAdapter(postAdapter);
+                    disable(gridViewButton);
+                    toggle(listViewButton);
+                }
+        }
     }
 }
