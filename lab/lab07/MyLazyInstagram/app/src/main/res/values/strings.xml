@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyLazyInstagram</string>
+    <string name="posts_text">posts</string>
+    <string name="following_text">following</string>
+    <string name="follow_text_off">Follow</string>
+    <string name="followed_text_on">Followed</string>
+    <string name="grid_button">Grid</string>
+    <string name="linear_button">Linear</string>
 </resources>

@@ -45,11 +45,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="10"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="10" />
 
                 <TextView
                     android:id="@+id/followingTextView"
@@ -57,11 +57,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="100" />
 
                 <TextView
                     android:id="@+id/followerTextView"
@@ -69,11 +69,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="1000000"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="1000" />
 
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="top|center_vertical"
-                    android:text="posts"
+                    android:text="@string/posts_text"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp" />
@@ -98,7 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="top|center_vertical"
-                    android:text="following"
+                    android:text="@string/following_text"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp" />
@@ -122,8 +122,8 @@
                 android:background="@drawable/follow_button_bg"
                 android:textColor="@color/follow_button_color"
                 android:textSize="16sp"
-                android:textOff="Follow"
-                android:textOn="Followed"
+                android:textOff="@string/follow_text_off"
+                android:textOn="@string/followed_text_on"
                 android:textAllCaps="false"/>
 
         </LinearLayout>
@@ -148,10 +148,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Taweewong Tocharoen"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Taweewong Tocharoen" />
 
         <TextView
             android:id="@+id/bioTextView"
@@ -159,9 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
-            android:text="The Official Instragram"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="This is bio" />
     </LinearLayout>
 
     <LinearLayout
@@ -185,8 +185,8 @@
             android:checked="true"
             android:textAllCaps="false"
             android:textColor="@color/grid_view_button_color"
-            android:textOff="Grid"
-            android:textOn="Grid" />
+            android:textOff="@string/grid_button"
+            android:textOn="@string/grid_button" />
 
         <ToggleButton
             android:id="@+id/linearViewButton"
@@ -196,8 +196,8 @@
             android:background="@android:color/white"
             android:textAllCaps="false"
             android:textColor="@color/grid_view_button_color"
-            android:textOff="Linear"
-            android:textOn="Linear" />
+            android:textOff="@string/linear_button"
+            android:textOn="@string/linear_button" />
 
     </LinearLayout>
 

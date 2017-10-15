@@ -23,34 +23,27 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="@+id/postImage"
         app:layout_constraintLeft_toLeftOf="@+id/postImage"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintTop_toBottomOf="@+id/postImage">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Like"
-            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/likeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:drawableLeft="@drawable/ic_like"
+            android:textColor="@android:color/black"
+            android:gravity="center"
             android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Comment" />
 
         <TextView
             android:id="@+id/commentText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="0"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:drawableLeft="@drawable/ic_comment"
             android:layout_weight="1" />
 
     </LinearLayout>
