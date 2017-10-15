@@ -1,6 +1,6 @@
 package com.taweewong.mylazyinstagram.controller;
 
-import android.content.Intent;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,7 +19,7 @@ import com.taweewong.mylazyinstagram.R;
 import com.taweewong.mylazyinstagram.adapter.LargePostAdapter;
 import com.taweewong.mylazyinstagram.adapter.PostAdapter;
 import com.taweewong.mylazyinstagram.api.LazyInstragramAPI;
-import com.taweewong.mylazyinstagram.model.Post;
+import com.taweewong.mylazyinstagram.fragment.SwitchUserDialogFragment;
 import com.taweewong.mylazyinstagram.model.UserProfile;
 
 import okhttp3.OkHttpClient;
@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity{
     ToggleButton gridViewButton;
     PostAdapter postAdapter;
     LargePostAdapter largePostAdapter;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("username");
 
         if (username == null) {
             username = "android";
@@ -87,10 +88,10 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_switch) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            intent.putExtra("username", "cartoon");
-            startActivity(intent);
-            finish();
+            FragmentManager fragmentManager = getFragmentManager();
+            SwitchUserDialogFragment dialogFragment = new SwitchUserDialogFragment();
+            dialogFragment.newInstance(username)
+                .show(fragmentManager, "Switcher User");
         }
         return true;
     }
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 if (response.isSuccessful()) {
                     UserProfile userProfile = response.body();
-
                     setMainActivityDisplay(userProfile);
                     setMainActivityAdapter(userProfile);
                 }
