@@ -21,6 +21,7 @@ import com.taweewong.mylazyinstagram.adapter.PostAdapter;
 import com.taweewong.mylazyinstagram.api.LazyInstragramAPI;
 import com.taweewong.mylazyinstagram.fragment.SwitchUserDialogFragment;
 import com.taweewong.mylazyinstagram.model.UserProfile;
+import com.taweewong.mylazyinstagram.utility.ProgressIndicator;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     ToggleButton listViewButton;
     ToggleButton gridViewButton;
+    ProgressIndicator progressIndicator;
     PostAdapter postAdapter;
     LargePostAdapter largePostAdapter;
     String username;
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressIndicator = new ProgressIndicator(this);
+        progressIndicator.show();
+
         username = getUsername();
         getUserProfile(username);
 
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listViewButton.setOnClickListener(this);
         gridViewButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -106,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     UserProfile userProfile = response.body();
                     setMainActivityDisplay(userProfile);
                     setMainActivityAdapter(userProfile);
+                    progressIndicator.hide();
                 }
             }
 
