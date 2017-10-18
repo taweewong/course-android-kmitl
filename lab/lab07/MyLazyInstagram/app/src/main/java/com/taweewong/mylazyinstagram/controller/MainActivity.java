@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,8 @@ import com.taweewong.mylazyinstagram.adapter.LargePostAdapter;
 import com.taweewong.mylazyinstagram.adapter.PostAdapter;
 import com.taweewong.mylazyinstagram.api.LazyInstragramAPI;
 import com.taweewong.mylazyinstagram.fragment.SwitchUserDialogFragment;
+import com.taweewong.mylazyinstagram.model.FollowRequest;
+import com.taweewong.mylazyinstagram.model.FollowResponse;
 import com.taweewong.mylazyinstagram.model.UserProfile;
 import com.taweewong.mylazyinstagram.utility.ProgressIndicator;
 
@@ -34,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     ToggleButton listViewButton;
     ToggleButton gridViewButton;
+    ToggleButton followButton;
     ProgressIndicator progressIndicator;
     PostAdapter postAdapter;
     LargePostAdapter largePostAdapter;
     String username;
+    UserProfile userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listViewButton = findViewById(R.id.listViewButton);
         gridViewButton = findViewById(R.id.gridViewButton);
+        followButton = findViewById(R.id.followButton);
 
         listViewButton.setOnClickListener(this);
         gridViewButton.setOnClickListener(this);
+        followButton.setOnClickListener(this);
 
     }
 
@@ -109,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 if (response.isSuccessful()) {
-                    UserProfile userProfile = response.body();
+                    userProfile = response.body();
                     setMainActivityDisplay(userProfile);
                     setMainActivityAdapter(userProfile);
                     progressIndicator.hide();
@@ -118,6 +125,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<UserProfile> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void postIsFollow(FollowRequest request) {
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(LazyInstragramAPI.BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        LazyInstragramAPI lazyInstragramAPI = retrofit.create(LazyInstragramAPI.class);
+
+        Call<FollowResponse> call = lazyInstragramAPI.getFollowResponse(request);
+        call.enqueue(new Callback<FollowResponse>() {
+            @Override
+            public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
+                if (response.isSuccessful()) {
+                    progressIndicator.hide();
+                    Toast.makeText(MainActivity.this, "Updated follow successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    progressIndicator.hide();
+                    toggle(followButton);
+                    Toast.makeText(MainActivity.this, "Update follow failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FollowResponse> call, Throwable t) {
 
             }
         });
@@ -139,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView followerTextView = findViewById(R.id.followerTextView);
         TextView followingTextView = findViewById(R.id.followingTextView);
         TextView bioTextView = findViewById(R.id.bioTextView);
-        ToggleButton followButton = findViewById(R.id.followButton);
 
         usernameTextView.setText(userProfile.getUser());
         Glide.with(MainActivity.this).load(userProfile.getUrlProfile()).into(userImage);
@@ -164,6 +201,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 recyclerView.setAdapter(largePostAdapter);
                 disable(listViewButton);
                 toggle(gridViewButton);
+                break;
+           case  R.id.followButton:
+               progressIndicator.show();
+               FollowRequest request = new FollowRequest(userProfile.getUser(), !userProfile.getFollow());
+               postIsFollow(request);
         }
     }
 }
