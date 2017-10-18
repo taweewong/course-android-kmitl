@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView followerTextView = findViewById(R.id.followerTextView);
         TextView followingTextView = findViewById(R.id.followingTextView);
         TextView bioTextView = findViewById(R.id.bioTextView);
+        ToggleButton followButton = findViewById(R.id.followButton);
 
         usernameTextView.setText(userProfile.getUser());
         Glide.with(MainActivity.this).load(userProfile.getUrlProfile()).into(userImage);
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         followerTextView.setText(String.valueOf(userProfile.getFollower()));
         followingTextView.setText(String.valueOf(userProfile.getFollowing()));
         bioTextView.setText(userProfile.getBio());
+        followButton.setChecked(userProfile.getFollow());
     }
 
     @Override
