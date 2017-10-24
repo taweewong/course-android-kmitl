@@ -51,4 +51,10 @@ public class MainActivityTest {
         onView(withId(R.id.buttonAdded)).perform(click());
         onView(withText("Please Enter user info")).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void EmptyListTest() {
+        onView(withId(R.id.buttonGotoList)).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
+    }
 }
