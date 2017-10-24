@@ -36,4 +36,11 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @Test
+    public void EmptyNameAgeTest() {
+        onView(withId(R.id.editTExtName)).check(matches(withText("")));
+        onView(withId(R.id.editTextAge)).check(matches(withText("")));
+        onView(withId(R.id.buttonAdded)).perform(click());
+        onView(withText("Please Enter user info")).check(matches(isDisplayed()));
+    }
 }
