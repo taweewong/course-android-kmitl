@@ -57,4 +57,12 @@ public class MainActivityTest {
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withText("Not Found")).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void EmptyAgeTest() {
+        onView(withId(R.id.editTextAge)).check(matches(withText("")));
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+        onView(withText("Please Enter user info")).check(matches(isDisplayed()));
+    }
 }
