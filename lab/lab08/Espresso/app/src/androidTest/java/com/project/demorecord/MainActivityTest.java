@@ -43,4 +43,12 @@ public class MainActivityTest {
         onView(withId(R.id.buttonAdded)).perform(click());
         onView(withText("Please Enter user info")).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void EmptyNameTest() {
+        onView(withId(R.id.editTExtName)).check(matches(withText("")));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+        onView(withText("Please Enter user info")).check(matches(isDisplayed()));
+    }
 }
