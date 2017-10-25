@@ -16,10 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -65,46 +63,102 @@ public class MainActivityTest {
 
     @Test
     public void listIndexZeroTest() {
-        onView(withId(R.id.editTExtName)).perform(typeText("YING"));
-        onView(withId(R.id.editTextAge)).perform(typeText("20"));
-        pressBack();
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
+
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("YING"))));
         onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("20"))));
+        onView(withId(R.id.buttonDelete)).perform(click());
     }
 
     @Test
     public void listIndexOneTest() {
-        onView(withId(R.id.editTExtName)).perform(typeText("Ladarat"));
-        onView(withId(R.id.editTextAge)).perform(typeText("20"));
-        pressBack();
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withRecyclerView(R.id.list, 1)).check(matches(hasDescendant(withText("Ladarat"))));
         onView(withRecyclerView(R.id.list, 1)).check(matches(hasDescendant(withText("20"))));
+        onView(withId(R.id.buttonDelete)).perform(click());
     }
 
     @Test
     public void listIndexTwoTest() {
-        onView(withId(R.id.editTExtName)).perform(typeText("Somkiat"));
-        onView(withId(R.id.editTextAge)).perform(typeText("80"));
-        pressBack();
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Somkiat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("80"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withRecyclerView(R.id.list, 2)).check(matches(hasDescendant(withText("Somkiat"))));
         onView(withRecyclerView(R.id.list, 2)).check(matches(hasDescendant(withText("80"))));
+        onView(withId(R.id.buttonDelete)).perform(click());
     }
 
     @Test
     public void listIndexThreeTest() {
-        onView(withId(R.id.editTExtName)).perform(typeText("Prayoch"));
-        onView(withId(R.id.editTextAge)).perform(typeText("60"));
-        pressBack();
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Somkiat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("80"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("60"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withRecyclerView(R.id.list, 3)).check(matches(hasDescendant(withText("Prayoch"))));
         onView(withRecyclerView(R.id.list, 3)).check(matches(hasDescendant(withText("60"))));
+        onView(withId(R.id.buttonDelete)).perform(click());
+    }
+
+    @Test
+    public void listIndexFourTest() {
+        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Somkiat"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("80"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("60"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"));
+        onView(withId(R.id.editTextAge)).perform(replaceText("50"));
+        onView(withId(R.id.buttonAdded)).perform(click());
+
+        onView(withId(R.id.buttonGotoList)).perform(click());
+        onView(withRecyclerView(R.id.list, 4)).check(matches(hasDescendant(withText("Prayoch"))));
+        onView(withRecyclerView(R.id.list, 4)).check(matches(hasDescendant(withText("50"))));
+        onView(withId(R.id.buttonDelete)).perform(click());
     }
 
     private Matcher<View> withRecyclerView(int id, int index) {
