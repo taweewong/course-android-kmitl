@@ -13,6 +13,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UserInfoListActivity extends AppCompatActivity {
 
@@ -57,6 +58,16 @@ public class UserInfoListActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
 
+    }
+
+    @OnClick(R.id.buttonDelete)
+    public void clearList() {
+        UserInfoList userInfoList = (UserInfoList) preference
+                .read(UserInfoListActivity.EXTTRA_LIST, UserInfoList.class);
+        userInfoList.getUserInfoList().clear();
+        preference.save(UserInfoListActivity.EXTTRA_LIST, userInfoList);
+        adapter.setData(userInfoList.getUserInfoList());
+        adapter.notifyDataSetChanged();
     }
 
 }

@@ -60,12 +60,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.buttonDelete)
-    public void clearList() {
-        userInfoList.getUserInfoList().clear();
-        preference.save(UserInfoListActivity.EXTTRA_LIST, userInfoList);
-    }
-
     private void setUserInfo(String name, String age) {
         UserInfo userInfo = new UserInfo();
         userInfo.setName(name);
