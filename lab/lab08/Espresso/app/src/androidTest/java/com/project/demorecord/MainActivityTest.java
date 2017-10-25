@@ -19,10 +19,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -67,7 +67,11 @@ public class MainActivityTest {
         onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
         onView(withId(R.id.buttonGotoList)).perform(click());
-        onView(allOf((childAtPosition(withId(R.id.list), 0)), withText("YING"), withText("20"), isDisplayed()));
+        onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("ying"))));
+    }
+
+    private Matcher<View> withRecyclerView(int id, int index) {
+        return childAtPosition(childAtPosition(withId(id), index), 0);
     }
 
     private static Matcher<View> childAtPosition(
