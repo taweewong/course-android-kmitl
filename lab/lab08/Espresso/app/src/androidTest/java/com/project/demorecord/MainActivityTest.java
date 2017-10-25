@@ -74,6 +74,17 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("20"))));
     }
 
+    @Test
+    public void listIndexOneTest() {
+        onView(withId(R.id.editTExtName)).perform(typeText("Ladarat"));
+        onView(withId(R.id.editTextAge)).perform(typeText("20"));
+        pressBack();
+        onView(withId(R.id.buttonAdded)).perform(click());
+        onView(withId(R.id.buttonGotoList)).perform(click());
+        onView(withRecyclerView(R.id.list, 1)).check(matches(hasDescendant(withText("Ladarat"))));
+        onView(withRecyclerView(R.id.list, 1)).check(matches(hasDescendant(withText("20"))));
+    }
+
     private Matcher<View> withRecyclerView(int id, int index) {
         return childAtPosition(childAtPosition(withId(id), index), 0);
     }
