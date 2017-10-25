@@ -16,8 +16,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -32,7 +34,7 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void EmptyNameAgeTest() {
+    public void emptyNameAgeTest() {
         onView(withId(R.id.editTExtName)).check(matches(withText("")));
         onView(withId(R.id.editTextAge)).check(matches(withText("")));
         onView(withId(R.id.buttonAdded)).perform(click());
@@ -40,7 +42,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void EmptyNameTest() {
+    public void emptyNameTest() {
         onView(withId(R.id.editTExtName)).check(matches(withText("")));
         onView(withId(R.id.editTextAge)).perform(replaceText("20"));
         onView(withId(R.id.buttonAdded)).perform(click());
@@ -48,13 +50,13 @@ public class MainActivityTest {
     }
 
     @Test
-    public void EmptyListTest() {
+    public void emptyListTest() {
         onView(withId(R.id.buttonGotoList)).perform(click());
         onView(withText("Not Found")).check(matches(isDisplayed()));
     }
 
     @Test
-    public void EmptyAgeTest() {
+    public void emptyAgeTest() {
         onView(withId(R.id.editTextAge)).check(matches(withText("")));
         onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
         onView(withId(R.id.buttonAdded)).perform(click());
@@ -62,12 +64,14 @@ public class MainActivityTest {
     }
 
     @Test
-    public void ListIndexZeroTest() {
-        onView(withId(R.id.editTExtName)).perform(replaceText("YING"));
-        onView(withId(R.id.editTextAge)).perform(replaceText("20"));
+    public void listIndexZeroTest() {
+        onView(withId(R.id.editTExtName)).perform(typeText("YING"));
+        onView(withId(R.id.editTextAge)).perform(typeText("20"));
+        pressBack();
         onView(withId(R.id.buttonAdded)).perform(click());
         onView(withId(R.id.buttonGotoList)).perform(click());
-        onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("ying"))));
+        onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("YING"))));
+        onView(withRecyclerView(R.id.list, 0)).check(matches(hasDescendant(withText("20"))));
     }
 
     private Matcher<View> withRecyclerView(int id, int index) {
