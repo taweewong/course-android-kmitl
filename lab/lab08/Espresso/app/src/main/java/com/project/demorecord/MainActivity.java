@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.buttonAdded)
     public void added() {
+        userInfoList = (UserInfoList) preference.read(UserInfoListActivity.EXTTRA_LIST, UserInfoList.class);
         String name = editTExtName.getText().toString();
         String age = editTextAge.getText().toString();
 
