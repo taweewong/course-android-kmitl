@@ -11,5 +11,8 @@ public class EditTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_transaction);
+        getSupportActionBar().setElevation(0);
+        setTitle("Edit Transaction");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
