@@ -4,6 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.taweewong.moneyflow.controller.AddTransactionActivity">
+
+    <LinearLayout
+        android:id="@+id/addTypeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ToggleButton
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/type_button_text"
+            android:textOn="@string/income"
+            android:textOff="@string/income"
+            android:textSize="16sp"
+            android:checked="true"
+            android:textAllCaps="false"
+            android:background="@drawable/type_button_left" />
+
+        <ToggleButton
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/type_button_text"
+            android:textOn="@string/expense"
+            android:textOff="@string/expense"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:background="@drawable/type_button_right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addAmountLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTypeLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/ic_dollars_bills" />
+
+        <EditText
+            android:id="@+id/addAmountEditText"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/white"
+            android:inputType="number"
+            android:hint="@string/amount"
+            android:textColorHint="@color/hintGray"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addNoteLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAmountLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/ic_note_with_text_lines" />
+
+        <EditText
+            android:id="@+id/addNoteEditText"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/white"
+            android:inputType="text"
+            android:hint="@string/note"
+            android:textColorHint="@color/hintGray"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/confirm_button"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteLayout" />
 
 </android.support.constraint.ConstraintLayout>
