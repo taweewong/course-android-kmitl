@@ -38,13 +38,15 @@ public class TransactionService {
     public void insertTransaction(Transaction transaction) {
         Observable.fromCallable(() -> transactionDAO.insertTransaction(transaction))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     public void deleteTransaction(Transaction transaction) {
         Observable.fromCallable(() -> transactionDAO.deleteTransaction(transaction))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     public void getAllTransactions() {
