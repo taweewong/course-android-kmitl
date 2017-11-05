@@ -14,8 +14,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class TransactionService {
+
+    public interface OnGetTransactionCallback {
+        void getTransactionCallback(List<Transaction> transactions);
+    }
+
     private TransactionDAO transactionDAO;
     private TransactionDB transactionDB;
+    private OnGetTransactionCallback callback;
 
     public TransactionService(Context context) {
         buildTransactionDatabase(context);
@@ -41,10 +47,14 @@ public class TransactionService {
                 .subscribeOn(Schedulers.io());
     }
 
-    public List<Transaction> getAllTransactions() {
-        return Observable.fromCallable(transactionDAO::getAllTransaction)
+    public void getAllTransactions() {
+        Observable.fromCallable(transactionDAO::getAllTransaction)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .blockingFirst();
+                .subscribe(transactions -> callback.getTransactionCallback(transactions));
+    }
+
+    public void setCallback(OnGetTransactionCallback callback) {
+        this.callback = callback;
     }
 }
