@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/typeImage"
-            android:layout_width="wrap_content"
+            android:layout_width="12dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="25dp"
             android:src="@drawable/ic_note_with_text_lines" />
