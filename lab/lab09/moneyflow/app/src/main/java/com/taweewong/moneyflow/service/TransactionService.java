@@ -20,11 +20,11 @@ public class TransactionService {
     }
 
     public interface OnGetTransactionIncomeSummaryCallback {
-        void getTransactionIncomeSummaryCallback(Float summaryAmount);
+        void getTransactionIncomeSummaryCallback(Float incomeAmount);
     }
 
     public interface OnGetTransactionExpenseSummaryCallback {
-        void getTransactionExpenseSummaryCallback(Float summaryAmount);
+        void getTransactionExpenseSummaryCallback(Float expenseAmount);
     }
 
     public interface OnGetTransactionSummaryCallback {
@@ -94,5 +94,17 @@ public class TransactionService {
 
     public void setTransactionCallback(OnGetTransactionCallback transactionCallback) {
         this.transactionCallback = transactionCallback;
+    }
+
+    public void setTransactionIncomeSummaryCallback(OnGetTransactionIncomeSummaryCallback transactionIncomeSummaryCallback) {
+        this.transactionIncomeSummaryCallback = transactionIncomeSummaryCallback;
+    }
+
+    public void setTransactionExpenseSummaryCallback(OnGetTransactionExpenseSummaryCallback transactionExpenseSummaryCallback) {
+        this.transactionExpenseSummaryCallback = transactionExpenseSummaryCallback;
+    }
+
+    public void setTransactionSummaryCallback(OnGetTransactionSummaryCallback transactionSummaryCallback) {
+        this.transactionSummaryCallback = transactionSummaryCallback;
     }
 }
