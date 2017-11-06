@@ -61,16 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void getTransactionSummaryCallback(Float summaryAmount) {
+    public void getTransactionSummaryCallback(Double summaryAmount) {
         setTotalBalanceTextDisplay(summaryAmount);
     }
 
-    private void setTotalBalanceTextDisplay(Float amount) {
+    private void setTotalBalanceTextDisplay(Double amount) {
         DecimalFormat formatter = new DecimalFormat("#,###.00");
         totalBalanceText.setText(String.format("฿%s", formatter.format(amount)));
 
         transactionService.setTransactionIncomeSummaryCallback(summaryAmount -> {
-            float percentOfRemainAmount = ((amount * 100) / summaryAmount);
+            double percentOfRemainAmount = ((amount * 100) / summaryAmount);
 
             if (percentOfRemainAmount >= 50) {
                 totalBalanceText.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.textGreen));
@@ -82,5 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         transactionService.getTransactionIncomeSummary();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        transactionService.getAllTransactions();
+        transactionService.getTransactionSummary();
     }
 }
