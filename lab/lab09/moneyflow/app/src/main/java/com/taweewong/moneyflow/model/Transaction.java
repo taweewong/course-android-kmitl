@@ -22,6 +22,10 @@ public class Transaction {
     @ColumnInfo(name = "type")
     private String type;
 
+    public enum TransactionType {
+        INCOME, EXPENSE
+    }
+
     public Transaction(float amount, String note, String date, String type) {
         this.amount = amount;
         this.note = note;
