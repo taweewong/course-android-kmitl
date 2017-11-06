@@ -20,4 +20,7 @@ public interface TransactionDAO {
 
     @Delete
     int deleteTransaction(Transaction transaction);
+
+    @Query("SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'INCOME'")
+    Float getTransactionIncomeSummary();
 }
