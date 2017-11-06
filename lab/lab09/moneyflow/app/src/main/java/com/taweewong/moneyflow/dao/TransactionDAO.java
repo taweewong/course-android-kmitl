@@ -21,13 +21,14 @@ public interface TransactionDAO {
     @Delete
     int deleteTransaction(Transaction transaction);
 
-    @Query("SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'INCOME'")
-    Float getTransactionIncomeSummary();
+    @Query("SELECT IFNULL(sum(amount), 0) FROM `TRANSACTION` WHERE type = 'INCOME'")
+    Double getTransactionIncomeSummary();
 
-    @Query("SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE'")
-    Float getTransactionExpenseSummary();
+    @Query("SELECT IFNULL(sum(amount), 0) FROM `TRANSACTION` WHERE type = 'EXPENSE'")
+    Double getTransactionExpenseSummary();
 
-    @Query("SELECT sum(amount) - (SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE')" +
+    @Query("SELECT IFNULL(IFNULL(sum(amount), 0) - " +
+            "IFNULL((SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE'), 0), 0)" +
             " FROM `TRANSACTION` WHERE type = 'INCOME'")
-    Float getTransactionSummary();
+    Double getTransactionSummary();
 }
