@@ -26,4 +26,8 @@ public interface TransactionDAO {
 
     @Query("SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE'")
     Float getTransactionExpenseSummary();
+
+    @Query("SELECT sum(amount) - (SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE')" +
+            " FROM `TRANSACTION` WHERE type = 'INCOME'")
+    Float getTransactionSummary();
 }
