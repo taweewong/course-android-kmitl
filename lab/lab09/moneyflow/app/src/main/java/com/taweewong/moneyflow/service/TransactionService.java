@@ -17,14 +17,26 @@ public class TransactionService {
 
     public interface OnGetTransactionCallback {
         void getTransactionCallback(List<Transaction> transactions);
+    }
+
+    public interface OnGetTransactionIncomeSummaryCallback {
         void getTransactionIncomeSummaryCallback(Float summaryAmount);
+    }
+
+    public interface OnGetTransactionExpenseSummaryCallback {
         void getTransactionExpenseSummaryCallback(Float summaryAmount);
+    }
+
+    public interface OnGetTransactionSummaryCallback {
         void getTransactionSummaryCallback(Float summaryAmount);
     }
 
     private TransactionDAO transactionDAO;
     private TransactionDB transactionDB;
-    private OnGetTransactionCallback callback;
+    private OnGetTransactionCallback transactionCallback;
+    private OnGetTransactionIncomeSummaryCallback transactionIncomeSummaryCallback;
+    private OnGetTransactionExpenseSummaryCallback transactionExpenseSummaryCallback;
+    private OnGetTransactionSummaryCallback transactionSummaryCallback;
 
     public TransactionService(Context context) {
         buildTransactionDatabase(context);
@@ -56,31 +68,31 @@ public class TransactionService {
         Observable.fromCallable(transactionDAO::getAllTransaction)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(transactions -> callback.getTransactionCallback(transactions));
+                .subscribe(transactions -> transactionCallback.getTransactionCallback(transactions));
     }
 
     public void getTransactionIncomeSummary() {
         Observable.fromCallable(transactionDAO::getTransactionIncomeSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> callback.getTransactionIncomeSummaryCallback(aFloat));
+                .subscribe(aFloat -> transactionIncomeSummaryCallback.getTransactionIncomeSummaryCallback(aFloat));
     }
 
     public void getTransactionExpenseSummary() {
         Observable.fromCallable(transactionDAO::getTransactionExpenseSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> callback.getTransactionExpenseSummaryCallback(aFloat));
+                .subscribe(aFloat -> transactionExpenseSummaryCallback.getTransactionExpenseSummaryCallback(aFloat));
     }
 
     public void getTransactionSummary() {
         Observable.fromCallable(transactionDAO::getTransactionSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> callback.getTransactionSummaryCallback(aFloat));
+                .subscribe(aFloat -> transactionSummaryCallback.getTransactionSummaryCallback(aFloat));
     }
 
-    public void setCallback(OnGetTransactionCallback callback) {
-        this.callback = callback;
+    public void setTransactionCallback(OnGetTransactionCallback transactionCallback) {
+        this.transactionCallback = transactionCallback;
     }
 }
