@@ -19,6 +19,7 @@ public class TransactionService {
         void getTransactionCallback(List<Transaction> transactions);
         void getTransactionIncomeSummaryCallback(Float summaryAmount);
         void getTransactionExpenseSummaryCallback(Float summaryAmount);
+        void getTransactionSummaryCallback(Float summaryAmount);
     }
 
     private TransactionDAO transactionDAO;
@@ -70,6 +71,13 @@ public class TransactionService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(aFloat -> callback.getTransactionExpenseSummaryCallback(aFloat));
+    }
+
+    public void getTransactionSummary() {
+        Observable.fromCallable(transactionDAO::getTransactionSummary)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(aFloat -> callback.getTransactionSummaryCallback(aFloat));
     }
 
     public void setCallback(OnGetTransactionCallback callback) {
