@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.taweewong.moneyflow.R;
 import com.taweewong.moneyflow.adapter.TransactionAdapter;
-import com.taweewong.moneyflow.entity.Transaction;
+import com.taweewong.moneyflow.model.Transaction;
 import com.taweewong.moneyflow.service.TransactionService;
+import static com.taweewong.moneyflow.EnumTest.*;
 
 import java.util.List;
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transactionService = new TransactionService(this);
         transactionService.setCallback(this);
         transactionService.getAllTransactions();
+
+        Toast.makeText(this, INCOME.name(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

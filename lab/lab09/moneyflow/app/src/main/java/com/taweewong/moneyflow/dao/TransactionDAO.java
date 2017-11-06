@@ -5,7 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.taweewong.moneyflow.entity.Transaction;
+import com.taweewong.moneyflow.model.Transaction;
 
 import java.util.List;
 

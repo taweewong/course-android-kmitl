@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.taweewong.moneyflow.dao.TransactionDAO;
 import com.taweewong.moneyflow.database.TransactionDB;
-import com.taweewong.moneyflow.entity.Transaction;
+import com.taweewong.moneyflow.model.Transaction;
 
 import java.util.List;
 

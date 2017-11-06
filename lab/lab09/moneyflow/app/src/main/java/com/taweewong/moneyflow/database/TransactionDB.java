@@ -4,7 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
 import com.taweewong.moneyflow.dao.TransactionDAO;
-import com.taweewong.moneyflow.entity.Transaction;
+import com.taweewong.moneyflow.model.Transaction;
 
 @Database(entities = {Transaction.class}, version = 1)
 public abstract class TransactionDB extends RoomDatabase {

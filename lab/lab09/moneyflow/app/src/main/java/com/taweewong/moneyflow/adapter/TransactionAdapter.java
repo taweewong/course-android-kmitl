@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.taweewong.moneyflow.R;
-import com.taweewong.moneyflow.entity.Transaction;
+import com.taweewong.moneyflow.model.Transaction;
 import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
 
 import java.util.List;

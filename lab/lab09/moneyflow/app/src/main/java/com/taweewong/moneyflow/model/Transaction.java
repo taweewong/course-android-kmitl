@@ -1,4 +1,4 @@
-package com.taweewong.moneyflow.entity;
+package com.taweewong.moneyflow.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
