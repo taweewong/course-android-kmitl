@@ -1,6 +1,7 @@
 package com.taweewong.moneyflow.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,13 +39,41 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         TextView dateText = holder.getDateText();
         TextView amountText = holder.getAmountText();
 
-        noteText.setText(transactions.get(position).getNote());
-        dateText.setText(transactions.get(position).getDate());
-        amountText.setText(String.valueOf(transactions.get(position).getAmount()));
+        String type = transactions.get(position).getType();
+        String amount = String.valueOf(transactions.get(position).getAmount());
+        String date = transactions.get(position).getDate();
+        String note = transactions.get(position).getNote();
+
+        setTransactionTypeImage(type, typeImage);
+        noteText.setText(note);
+        dateText.setText(date);
+        setTransactionAmountDisplay(type, amount, amountText);
     }
 
     @Override
     public int getItemCount() {
         return transactions.size();
+    }
+
+    private void setTransactionTypeImage(String type, ImageView typeImage) {
+        switch (type) {
+            case "income":
+                typeImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_left_down));
+                break;
+            default:
+                typeImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_right_up));
+        }
+    }
+
+    private void setTransactionAmountDisplay(String type, String text, TextView amountText) {
+        switch (type) {
+            case "income":
+                amountText.setTextColor(ContextCompat.getColor(context, R.color.textGreen));
+                amountText.setText(String.format("+ ฿%s", text));
+                break;
+            default:
+                amountText.setTextColor(ContextCompat.getColor(context, R.color.textRed));
+                amountText.setText(String.format("- ฿%s", text));
+        }
     }
 }
