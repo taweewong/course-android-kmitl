@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ToggleButton
+            android:id="@+id/addIncomeTypeButton"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:textColor="@color/type_button_text"
@@ -25,9 +26,11 @@
             android:textSize="16sp"
             android:checked="true"
             android:textAllCaps="false"
+            android:enabled="false"
             android:background="@drawable/type_button_left" />
 
         <ToggleButton
+            android:id="@+id/addExpenseTypeButton"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:textColor="@color/type_button_text"
