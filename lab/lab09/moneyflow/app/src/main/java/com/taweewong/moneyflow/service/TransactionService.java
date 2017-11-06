@@ -20,15 +20,15 @@ public class TransactionService {
     }
 
     public interface OnGetTransactionIncomeSummaryCallback {
-        void getTransactionIncomeSummaryCallback(Float incomeAmount);
+        void getTransactionIncomeSummaryCallback(Double incomeAmount);
     }
 
     public interface OnGetTransactionExpenseSummaryCallback {
-        void getTransactionExpenseSummaryCallback(Float expenseAmount);
+        void getTransactionExpenseSummaryCallback(Double expenseAmount);
     }
 
     public interface OnGetTransactionSummaryCallback {
-        void getTransactionSummaryCallback(Float summaryAmount);
+        void getTransactionSummaryCallback(Double summaryAmount);
     }
 
     private TransactionDAO transactionDAO;
@@ -75,21 +75,21 @@ public class TransactionService {
         Observable.fromCallable(transactionDAO::getTransactionIncomeSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> transactionIncomeSummaryCallback.getTransactionIncomeSummaryCallback(aFloat));
+                .subscribe(aDouble -> transactionIncomeSummaryCallback.getTransactionIncomeSummaryCallback(aDouble));
     }
 
     public void getTransactionExpenseSummary() {
         Observable.fromCallable(transactionDAO::getTransactionExpenseSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> transactionExpenseSummaryCallback.getTransactionExpenseSummaryCallback(aFloat));
+                .subscribe(aDouble -> transactionExpenseSummaryCallback.getTransactionExpenseSummaryCallback(aDouble));
     }
 
     public void getTransactionSummary() {
         Observable.fromCallable(transactionDAO::getTransactionSummary)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aFloat -> transactionSummaryCallback.getTransactionSummaryCallback(aFloat));
+                .subscribe(aDouble -> transactionSummaryCallback.getTransactionSummaryCallback(aDouble));
     }
 
     public void setTransactionCallback(OnGetTransactionCallback transactionCallback) {
