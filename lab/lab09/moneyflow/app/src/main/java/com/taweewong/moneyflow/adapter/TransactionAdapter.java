@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.taweewong.moneyflow.R;
 import com.taweewong.moneyflow.model.Transaction;
 import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
+import com.taweewong.moneyflow.model.Transaction.TransactionType;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         TextView dateText = holder.getDateText();
         TextView amountText = holder.getAmountText();
 
-        String type = transactions.get(position).getType();
+        TransactionType type = TransactionType.valueOf(transactions.get(position).getType());
         String amount = String.valueOf(transactions.get(position).getAmount());
         String date = transactions.get(position).getDate();
         String note = transactions.get(position).getNote();
@@ -55,23 +56,23 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         return transactions.size();
     }
 
-    private void setTransactionTypeImage(String type, ImageView typeImage) {
+    private void setTransactionTypeImage(TransactionType type, ImageView typeImage) {
         switch (type) {
-            case "income":
+            case INCOME:
                 typeImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_left_down));
                 break;
-            default:
+            case EXPENSE:
                 typeImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_right_up));
         }
     }
 
-    private void setTransactionAmountDisplay(String type, String text, TextView amountText) {
+    private void setTransactionAmountDisplay(TransactionType type, String text, TextView amountText) {
         switch (type) {
-            case "income":
+            case INCOME:
                 amountText.setTextColor(ContextCompat.getColor(context, R.color.textGreen));
                 amountText.setText(String.format("+ ฿%s", text));
                 break;
-            default:
+            case EXPENSE:
                 amountText.setTextColor(ContextCompat.getColor(context, R.color.textRed));
                 amountText.setText(String.format("- ฿%s", text));
         }
