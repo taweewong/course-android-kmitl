@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.taweewong.moneyflow.model.Transaction;
 
@@ -31,4 +32,7 @@ public interface TransactionDAO {
             "IFNULL((SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE'), 0), 0)" +
             " FROM `TRANSACTION` WHERE type = 'INCOME'")
     Double getTransactionSummary();
+
+    @Update
+    int updateTransaction(Transaction transaction);
 }
