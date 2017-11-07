@@ -23,10 +23,6 @@ public class TransactionService {
         void getTransactionIncomeSummaryCallback(Double incomeAmount);
     }
 
-    public interface OnGetTransactionExpenseSummaryCallback {
-        void getTransactionExpenseSummaryCallback(Double expenseAmount);
-    }
-
     public interface OnGetTransactionSummaryCallback {
         void getTransactionSummaryCallback(Double summaryAmount);
     }
@@ -35,7 +31,6 @@ public class TransactionService {
     private TransactionDB transactionDB;
     private OnGetTransactionCallback transactionCallback;
     private OnGetTransactionIncomeSummaryCallback transactionIncomeSummaryCallback;
-    private OnGetTransactionExpenseSummaryCallback transactionExpenseSummaryCallback;
     private OnGetTransactionSummaryCallback transactionSummaryCallback;
 
     public TransactionService(Context context) {
@@ -78,13 +73,6 @@ public class TransactionService {
                 .subscribe(aDouble -> transactionIncomeSummaryCallback.getTransactionIncomeSummaryCallback(aDouble));
     }
 
-    public void getTransactionExpenseSummary() {
-        Observable.fromCallable(transactionDAO::getTransactionExpenseSummary)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(aDouble -> transactionExpenseSummaryCallback.getTransactionExpenseSummaryCallback(aDouble));
-    }
-
     public void getTransactionSummary() {
         Observable.fromCallable(transactionDAO::getTransactionSummary)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,10 +93,6 @@ public class TransactionService {
 
     public void setTransactionIncomeSummaryCallback(OnGetTransactionIncomeSummaryCallback transactionIncomeSummaryCallback) {
         this.transactionIncomeSummaryCallback = transactionIncomeSummaryCallback;
-    }
-
-    public void setTransactionExpenseSummaryCallback(OnGetTransactionExpenseSummaryCallback transactionExpenseSummaryCallback) {
-        this.transactionExpenseSummaryCallback = transactionExpenseSummaryCallback;
     }
 
     public void setTransactionSummaryCallback(OnGetTransactionSummaryCallback transactionSummaryCallback) {
