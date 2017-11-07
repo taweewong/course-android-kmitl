@@ -92,6 +92,13 @@ public class TransactionService {
                 .subscribe(aDouble -> transactionSummaryCallback.getTransactionSummaryCallback(aDouble));
     }
 
+    public void updateTransaction(Transaction transaction) {
+        Observable.fromCallable(() -> transactionDAO.updateTransaction(transaction))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+    }
+
     public void setTransactionCallback(OnGetTransactionCallback transactionCallback) {
         this.transactionCallback = transactionCallback;
     }
