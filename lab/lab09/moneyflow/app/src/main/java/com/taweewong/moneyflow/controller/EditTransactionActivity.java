@@ -2,6 +2,7 @@ package com.taweewong.moneyflow.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
     EditText editAmountEditText;
     EditText editNoteEditText;
     Button editButton;
+    TransactionService transactionService;
 
     int id;
     double amount;
@@ -34,12 +36,20 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
     String type;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit_transaction_menu, menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_transaction);
         getSupportActionBar().setElevation(0);
         setTitle("Edit Transaction");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        transactionService = new TransactionService(this);
 
         id = getIntent().getIntExtra("id", 0);
         amount = getIntent().getDoubleExtra("amount", 0);
@@ -76,6 +86,10 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.menu_delete:
+                deleteTransactionInDatabase();
+                finish();
         }
         return true;
     }
@@ -96,8 +110,6 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
     }
 
     private void updateTransactionToDatabase() {
-        TransactionService transactionService = new TransactionService(this);
-
         Float amount = Float.valueOf(editAmountEditText.getText().toString());
         String note = editNoteEditText.getText().toString();
         String dateString = new SimpleDateFormat("dd MMM yyyy", Locale.US).format(new Date());
@@ -106,6 +118,12 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
         newTransaction.setId(id);
 
         transactionService.updateTransaction(newTransaction);
+    }
+
+    private void deleteTransactionInDatabase() {
+        Transaction deleteTransaction = new Transaction();
+        deleteTransaction.setId(id);
+        transactionService.deleteTransaction(deleteTransaction);
     }
 
     private void toggleTwoButton(ToggleButton toCheckedButton, ToggleButton toUncheckedButton) {
