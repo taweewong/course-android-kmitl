@@ -27,6 +27,12 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
     EditText editNoteEditText;
     Button editButton;
 
+    int id;
+    double amount;
+    String note;
+    String date;
+    String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +41,21 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
         setTitle("Edit Transaction");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        id = getIntent().getIntExtra("id", 0);
+        amount = getIntent().getDoubleExtra("amount", 0);
+        note = getIntent().getStringExtra("note");
+        date = getIntent().getStringExtra("date");
+        type = getIntent().getStringExtra("type");
+
         editIncomeTypeButton = findViewById(R.id.editIncomeTypeButton);
         editExpenseTypeButton = findViewById(R.id.editExpenseTypeButton);
         editAmountEditText = findViewById(R.id.editAmountEditText);
         editNoteEditText = findViewById(R.id.editNoteEditText);
         editButton = findViewById(R.id.editButton);
 
-        editAmountEditText.setText(String.valueOf(getIntent().getDoubleExtra("amount", 0)));
-        editNoteEditText.setText(getIntent().getStringExtra("note"));
-        setToggleButtonChecked(TransactionType.valueOf(getIntent().getStringExtra("type")));
+        editAmountEditText.setText(String.valueOf(amount));
+        editNoteEditText.setText(note);
+        setToggleButtonChecked(TransactionType.valueOf(type));
 
         editIncomeTypeButton.setOnClickListener(this);
         editExpenseTypeButton.setOnClickListener(this);
@@ -78,12 +90,12 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
                 toggleTwoButton(editExpenseTypeButton, editIncomeTypeButton);
                 break;
             case R.id.editButton:
-                insertTransactionToDatabase();
+                updateTransactionToDatabase();
                 finish();
         }
     }
 
-    private void insertTransactionToDatabase() {
+    private void updateTransactionToDatabase() {
         TransactionService transactionService = new TransactionService(this);
 
         Float amount = Float.valueOf(editAmountEditText.getText().toString());
@@ -91,8 +103,9 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
         String dateString = new SimpleDateFormat("dd MMM yyyy", Locale.US).format(new Date());
         String type = getTransactionType();
         Transaction newTransaction = new Transaction(amount, note, dateString, type);
+        newTransaction.setId(id);
 
-        transactionService.insertTransaction(newTransaction);
+        transactionService.updateTransaction(newTransaction);
     }
 
     private void toggleTwoButton(ToggleButton toCheckedButton, ToggleButton toUncheckedButton) {
