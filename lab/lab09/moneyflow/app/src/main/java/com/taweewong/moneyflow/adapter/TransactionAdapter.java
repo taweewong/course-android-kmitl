@@ -1,6 +1,7 @@
 package com.taweewong.moneyflow.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,25 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.taweewong.moneyflow.R;
+import com.taweewong.moneyflow.controller.EditTransactionActivity;
 import com.taweewong.moneyflow.model.Transaction;
-import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
 import com.taweewong.moneyflow.model.Transaction.TransactionType;
+import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
 
 import java.util.List;
 
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder> {
+public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder> implements View.OnClickListener {
     private List<Transaction> transactions;
     private Context context;
+    private RecyclerView recyclerView;
 
-    public TransactionAdapter(Context context, List<Transaction> transactions) {
+    public TransactionAdapter(Context context, List<Transaction> transactions, RecyclerView recyclerView) {
         this.transactions = transactions;
         this.context = context;
+        this.recyclerView = recyclerView;
     }
 
     @Override
     public TransactionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.transaction_view_holder, null, false);
+        itemView.setOnClickListener(this);
 
         return new TransactionViewHolder(itemView);
     }
@@ -76,5 +81,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
                 amountText.setTextColor(ContextCompat.getColor(context, R.color.textRed));
                 amountText.setText(String.format("- ฿%s", text));
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int itemPosition = recyclerView.getChildAdapterPosition(view);
+        Transaction transactionItem = transactions.get(itemPosition);
+
+        Intent intent = new Intent(context, EditTransactionActivity.class);
+        intent.putExtra("amount", transactionItem.getAmount());
+        intent.putExtra("note", transactionItem.getNote());
+        intent.putExtra("date", transactionItem.getDate());
+        intent.putExtra("type", transactionItem.getType());
+
+        context.startActivity(intent);
     }
 }

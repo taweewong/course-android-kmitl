@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (Transaction transaction : transactions) {
             Log.d("transaction_test", transaction.getId() + " : " + transaction.getAmount());
         }
-        transactionAdapter = new TransactionAdapter(MainActivity.this, transactions);
+        transactionAdapter = new TransactionAdapter(MainActivity.this, transactions, transactionRecyclerView);
         transactionRecyclerView.setAdapter(transactionAdapter);
     }
 
