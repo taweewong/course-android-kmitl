@@ -16,6 +16,7 @@ import com.taweewong.moneyflow.model.Transaction;
 import com.taweewong.moneyflow.model.Transaction.TransactionType;
 import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder> implements View.OnClickListener {
@@ -46,7 +47,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         TextView amountText = holder.getAmountText();
 
         TransactionType type = TransactionType.valueOf(transactions.get(position).getType());
-        String amount = String.valueOf(transactions.get(position).getAmount());
+        Double amount = transactions.get(position).getAmount();
         String date = transactions.get(position).getDate();
         String note = transactions.get(position).getNote();
 
@@ -71,15 +72,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         }
     }
 
-    private void setTransactionAmountDisplay(TransactionType type, String text, TextView amountText) {
+    private void setTransactionAmountDisplay(TransactionType type, Double text, TextView amountText) {
+        DecimalFormat formatter = new DecimalFormat("#,###.0");
+
         switch (type) {
             case INCOME:
                 amountText.setTextColor(ContextCompat.getColor(context, R.color.textGreen));
-                amountText.setText(String.format("+ ฿%s", text));
+                amountText.setText(String.format("+ ฿%s", formatter.format(text)));
                 break;
             case EXPENSE:
                 amountText.setTextColor(ContextCompat.getColor(context, R.color.textRed));
-                amountText.setText(String.format("- ฿%s", text));
+                amountText.setText(String.format("- ฿%s", formatter.format(text)));
         }
     }
 
