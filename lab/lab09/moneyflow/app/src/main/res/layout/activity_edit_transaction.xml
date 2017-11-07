@@ -64,7 +64,7 @@
             android:id="@+id/editAmountEditText"
             android:layout_width="match_parent"
             android:textColor="@android:color/white"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="@string/amount"
             android:textColorHint="@color/hintGray"
             android:layout_height="wrap_content" />
