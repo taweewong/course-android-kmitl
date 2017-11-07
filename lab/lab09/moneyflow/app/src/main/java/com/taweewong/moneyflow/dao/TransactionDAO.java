@@ -17,18 +17,18 @@ public interface TransactionDAO {
     List<Transaction> getAllTransaction();
 
     @Insert
-    Long insertTransaction(Transaction transaction);
+    long insertTransaction(Transaction transaction);
 
     @Delete
     int deleteTransaction(Transaction transaction);
 
     @Query("SELECT IFNULL(sum(amount), 0) FROM `TRANSACTION` WHERE type = 'INCOME'")
-    Double getTransactionIncomeSummary();
+    double getTransactionIncomeSummary();
 
     @Query("SELECT IFNULL(IFNULL(sum(amount), 0) - " +
             "IFNULL((SELECT sum(amount) FROM `TRANSACTION` WHERE type = 'EXPENSE'), 0), 0)" +
             " FROM `TRANSACTION` WHERE type = 'INCOME'")
-    Double getTransactionSummary();
+    double getTransactionSummary();
 
     @Update
     int updateTransaction(Transaction transaction);

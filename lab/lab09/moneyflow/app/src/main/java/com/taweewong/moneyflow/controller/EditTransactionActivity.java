@@ -18,22 +18,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.taweewong.moneyflow.model.Transaction.TransactionType.EXPENSE;
-import static com.taweewong.moneyflow.model.Transaction.TransactionType.INCOME;
+import static com.taweewong.moneyflow.model.Transaction.TransactionType.*;
+import static com.taweewong.moneyflow.model.Transaction.TransactionExtraName.*;
 
 public class EditTransactionActivity extends AppCompatActivity implements View.OnClickListener {
-    ToggleButton editIncomeTypeButton;
-    ToggleButton editExpenseTypeButton;
-    EditText editAmountEditText;
-    EditText editNoteEditText;
-    Button editButton;
-    TransactionService transactionService;
-
-    int id;
-    double amount;
-    String note;
-    String date;
-    String type;
+    private ToggleButton editIncomeTypeButton;
+    private ToggleButton editExpenseTypeButton;
+    private EditText editAmountEditText;
+    private EditText editNoteEditText;
+    private TransactionService transactionService;
+    private Transaction transaction;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,23 +43,29 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
         setTitle("Edit Transaction");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        collectExtras();
+        initializeService();
+        initializeView();
+    }
+
+    private void collectExtras() {
+        transaction = getIntent().getParcelableExtra(TRANSACTION_EXTRA_NAME);
+    }
+
+    private void initializeService() {
         transactionService = new TransactionService(this);
+    }
 
-        id = getIntent().getIntExtra("id", 0);
-        amount = getIntent().getDoubleExtra("amount", 0);
-        note = getIntent().getStringExtra("note");
-        date = getIntent().getStringExtra("date");
-        type = getIntent().getStringExtra("type");
-
+    private void initializeView() {
         editIncomeTypeButton = findViewById(R.id.editIncomeTypeButton);
         editExpenseTypeButton = findViewById(R.id.editExpenseTypeButton);
         editAmountEditText = findViewById(R.id.editAmountEditText);
         editNoteEditText = findViewById(R.id.editNoteEditText);
-        editButton = findViewById(R.id.editButton);
+        Button editButton = findViewById(R.id.editButton);
 
-        editAmountEditText.setText(String.valueOf(amount));
-        editNoteEditText.setText(note);
-        setToggleButtonChecked(TransactionType.valueOf(type));
+        editAmountEditText.setText(String.valueOf(transaction.getAmount()));
+        editNoteEditText.setText(transaction.getNote());
+        setToggleButtonChecked(TransactionType.valueOf(transaction.getType()));
 
         editIncomeTypeButton.setOnClickListener(this);
         editExpenseTypeButton.setOnClickListener(this);
@@ -110,19 +110,24 @@ public class EditTransactionActivity extends AppCompatActivity implements View.O
     }
 
     private void updateTransactionToDatabase() {
-        Float amount = Float.valueOf(editAmountEditText.getText().toString());
-        String note = editNoteEditText.getText().toString();
-        String dateString = new SimpleDateFormat("dd MMM yyyy", Locale.US).format(new Date());
-        String type = getTransactionType();
-        Transaction newTransaction = new Transaction(amount, note, dateString, type);
-        newTransaction.setId(id);
+        Transaction newTransaction = createTransactionFromInput();
+        newTransaction.setId(transaction.getId());
 
         transactionService.updateTransaction(newTransaction);
     }
 
+    private Transaction createTransactionFromInput() {
+        float amount = Float.valueOf(editAmountEditText.getText().toString());
+        String note = editNoteEditText.getText().toString();
+        String dateString = new SimpleDateFormat("dd MMM yyyy", Locale.US).format(new Date());
+        String type = getTransactionType();
+
+        return new Transaction(amount, note, dateString, type);
+    }
+
     private void deleteTransactionInDatabase() {
         Transaction deleteTransaction = new Transaction();
-        deleteTransaction.setId(id);
+        deleteTransaction.setId(transaction.getId());
         transactionService.deleteTransaction(deleteTransaction);
     }
 

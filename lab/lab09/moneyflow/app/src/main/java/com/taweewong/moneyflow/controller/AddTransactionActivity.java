@@ -19,9 +19,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddTransactionActivity extends AppCompatActivity implements View.OnClickListener {
-    ToggleButton addIncomeTypeButton;
-    ToggleButton addExpenseTypeButton;
-    Button addButton;
+    private ToggleButton addIncomeTypeButton;
+    private ToggleButton addExpenseTypeButton;
+    private EditText addAmountEditText;
+    private EditText addNoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,15 @@ public class AddTransactionActivity extends AppCompatActivity implements View.On
         setTitle("Add Transaction");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initializeView();
+    }
+
+    private void initializeView() {
         addIncomeTypeButton = findViewById(R.id.addIncomeTypeButton);
         addExpenseTypeButton = findViewById(R.id.addExpenseTypeButton);
-        addButton = findViewById(R.id.addButton);
+        addAmountEditText = findViewById(R.id.addAmountEditText);
+        addNoteEditText = findViewById(R.id.addNoteEditText);
+        Button addButton = findViewById(R.id.addButton);
 
         addIncomeTypeButton.setOnClickListener(this);
         addExpenseTypeButton.setOnClickListener(this);
@@ -42,10 +49,7 @@ public class AddTransactionActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-        }
+        finish();
         return true;
     }
 
@@ -66,16 +70,18 @@ public class AddTransactionActivity extends AppCompatActivity implements View.On
 
     private void insertTransactionToDatabase() {
         TransactionService transactionService = new TransactionService(this);
-        EditText addAmountEditText = findViewById(R.id.addAmountEditText);
-        EditText addNoteEditText = findViewById(R.id.addNoteEditText);
+        Transaction newTransaction = createTransactionFromInput();
 
-        Float amount = Float.valueOf(addAmountEditText.getText().toString());
+        transactionService.insertTransaction(newTransaction);
+    }
+
+    private Transaction createTransactionFromInput() {
+        float amount = Float.valueOf(addAmountEditText.getText().toString());
         String note = addNoteEditText.getText().toString();
         String dateString = new SimpleDateFormat("dd MMM yyyy", Locale.US).format(new Date());
         String type = getTransactionType();
-        Transaction newTransaction = new Transaction(amount, note, dateString, type);
 
-        transactionService.insertTransaction(newTransaction);
+        return new Transaction(amount, note, dateString, type);
     }
 
     private void toggleTwoButton(ToggleButton toCheckedButton, ToggleButton toUncheckedButton) {

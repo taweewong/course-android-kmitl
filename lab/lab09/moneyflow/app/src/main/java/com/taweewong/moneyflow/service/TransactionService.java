@@ -20,11 +20,11 @@ public class TransactionService {
     }
 
     public interface OnGetTransactionIncomeSummaryCallback {
-        void getTransactionIncomeSummaryCallback(Double incomeAmount);
+        void getTransactionIncomeSummaryCallback(double incomeAmount);
     }
 
     public interface OnGetTransactionSummaryCallback {
-        void getTransactionSummaryCallback(Double summaryAmount);
+        void getTransactionSummaryCallback(double summaryAmount);
     }
 
     private TransactionDAO transactionDAO;

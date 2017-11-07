@@ -19,6 +19,8 @@ import com.taweewong.moneyflow.viewholder.TransactionViewHolder;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import static com.taweewong.moneyflow.model.Transaction.TransactionExtraName.*;
+
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder> implements View.OnClickListener {
     private List<Transaction> transactions;
     private Context context;
@@ -90,13 +92,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
     public void onClick(View view) {
         int itemPosition = recyclerView.getChildAdapterPosition(view);
         Transaction transactionItem = transactions.get(itemPosition);
-
         Intent intent = new Intent(context, EditTransactionActivity.class);
-        intent.putExtra("id", transactionItem.getId());
-        intent.putExtra("amount", transactionItem.getAmount());
-        intent.putExtra("note", transactionItem.getNote());
-        intent.putExtra("date", transactionItem.getDate());
-        intent.putExtra("type", transactionItem.getType());
+        intent.putExtra(TRANSACTION_EXTRA_NAME, transactionItem);
 
         context.startActivity(intent);
     }
