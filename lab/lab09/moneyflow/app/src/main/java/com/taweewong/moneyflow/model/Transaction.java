@@ -26,6 +26,10 @@ public class Transaction {
         INCOME, EXPENSE
     }
 
+    public Transaction() {
+
+    }
+
     public Transaction(double amount, String note, String date, String type) {
         this.amount = amount;
         this.note = note;
