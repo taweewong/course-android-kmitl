@@ -11,7 +11,7 @@ public class Transaction {
     private int id;
 
     @ColumnInfo(name = "amount")
-    private float amount;
+    private double amount;
 
     @ColumnInfo(name = "note")
     private String note;
@@ -26,7 +26,7 @@ public class Transaction {
         INCOME, EXPENSE
     }
 
-    public Transaction(float amount, String note, String date, String type) {
+    public Transaction(double amount, String note, String date, String type) {
         this.amount = amount;
         this.note = note;
         this.date = date;
@@ -41,11 +41,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
