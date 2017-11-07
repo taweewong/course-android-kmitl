@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initializeView();
         initializeService();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         displayTransactionInfo();
     }
 
@@ -95,12 +100,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             totalBalanceText.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.textRed));
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        transactionService.getAllTransactions();
-        transactionService.getTransactionSummary();
     }
 }
