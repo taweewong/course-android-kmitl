@@ -89,6 +89,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHold
         Transaction transactionItem = transactions.get(itemPosition);
 
         Intent intent = new Intent(context, EditTransactionActivity.class);
+        intent.putExtra("id", transactionItem.getId());
         intent.putExtra("amount", transactionItem.getAmount());
         intent.putExtra("note", transactionItem.getNote());
         intent.putExtra("date", transactionItem.getDate());
